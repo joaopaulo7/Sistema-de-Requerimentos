@@ -6,13 +6,17 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Login Sis.Req</title>
+        <title>Cadastro Sis.Req</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <div>
-            <form method="POST" action="login/login">
+            <form method="POST" action="cadastrar/fazercadastro">
+                <label for="Nome">
+                    Nome:
+                </label>
+                <input type="text" id="nome" name="nome"><br>
                 <label for="login">
                     Login:
                 </label>
@@ -25,7 +29,7 @@ and open the template in the editor.
                     Enviar
                 </button>
             </form>
-            <a href = 'http://127.0.0.1/Sistema-de-Requerimentos/CodeIgniter/index.php/cadastrar'> Cadastrar</a>
+        
         </div>
-      </body>
+    </body>
 </html>

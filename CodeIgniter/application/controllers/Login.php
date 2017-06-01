@@ -13,6 +13,7 @@ class Login extends CI_Controller {
     }
 
     public function index() {
+        $this->session->sess_destroy();
         $this->load->view('login');
     }
     
@@ -25,7 +26,7 @@ class Login extends CI_Controller {
             echo "Preencha todos os campos!!!";
         } else {
             $dados["senha"] = sha1($dados["senha"]);
-            $resultado = $this->Loginmodel->verificaacesso($dados);
+            $resultado = $this->Loginmodel->verificaAcesso($dados);
             if(count($resultado) == 1) {
                 $this->session->set_userdata($resultado[0]);
                 echo "Login efetuado com sucesso!!!";

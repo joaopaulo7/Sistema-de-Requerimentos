@@ -24,12 +24,6 @@ class Welcome extends CI_Controller {
 	//	$this->load->view('welcome_message');
 	$data ['mensagem']= "Hello world!!!!";
 	redirect('login');
-	}
-	public function teste() {
-		$this->load->library('session');
-		echo $this->session->userdata('login');
-		$data['postagens']= $this->db->get('postagens')->result();
-		$this->load->view('postagens',$data);
-    }		
+	}	
 }
 
