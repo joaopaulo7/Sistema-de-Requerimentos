@@ -16,5 +16,7 @@ class Menu extends CI_Controller {
     public function index() {
         echo "esse será o menu";
         echo anchor('login', 'Logout', 'title="Logout"');
+        echo anchor('Entrou/criarFormularioSubstituicao', 'Requerir Substituicao');
+        echo anchor('Entrou/criarFormularioVisita', 'Requerir Visita');
     }
 }

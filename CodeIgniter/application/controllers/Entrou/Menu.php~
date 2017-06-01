@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Logado extends CI_Controller {
+class Menu extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->database();
@@ -14,6 +14,9 @@ class Logado extends CI_Controller {
     }
     
     public function index() {
-        redirect('welcome/teste');
+        echo "esse será o menu";
+        echo anchor('login', 'Logout', 'title="Logout"');
+        echo anchor('Entrou/criarformulariosubstituicao', 'Requerir Substituicao');
+        echo anchor('Entrou/criarformulariovisita', 'Requerir Visita');
     }
 }
