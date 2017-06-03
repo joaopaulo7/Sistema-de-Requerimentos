@@ -10,8 +10,8 @@ class CriarFormularioVisita extends CI_Controller {
         $this->load->library("session");
         $this->load->library("form_validation");
         $this->load->model("VisitaModel");
-        if(!$this->session->userdata("Login")) {
-            redirect("login");
+        if(!$this->session->userdata("idUsuario")) {
+            redirect("login/logout");
         }
     }
     

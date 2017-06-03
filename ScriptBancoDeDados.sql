@@ -5,19 +5,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema blog
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema blog
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `blog` DEFAULT CHARACTER SET utf8 ;
+USE `blog` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Local`
+-- Table `blog`.`Local`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Local` (
+CREATE TABLE IF NOT EXISTS `blog`.`Local` (
   `idLocal` INT NOT NULL,
   `nome` TEXT NULL,
   `rua` TEXT NULL,
@@ -29,9 +29,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`aluno`
+-- Table `blog`.`aluno`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`aluno` (
+CREATE TABLE IF NOT EXISTS `blog`.`aluno` (
   `idaluno` INT NOT NULL,
   `curso` INT NULL,
   `nome` VARCHAR(150) NULL,
@@ -40,24 +40,24 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`curso`
+-- Table `blog`.`curso`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`curso` (
+CREATE TABLE IF NOT EXISTS `blog`.`curso` (
   `idcurso` INT NOT NULL,
   `nome_curso` VARCHAR(45) NULL,
   PRIMARY KEY (`idcurso`),
   CONSTRAINT `fk_curso_1`
     FOREIGN KEY (`idcurso`)
-    REFERENCES `mydb`.`aluno` (`idaluno`)
+    REFERENCES `blog`.`aluno` (`idaluno`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`FormularioVisita`
+-- Table `blog`.`FormularioVisita`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`FormularioVisita` (
+CREATE TABLE IF NOT EXISTS `blog`.`FormularioVisita` (
   `idFormulario` INT NOT NULL,
   `proponente_da_viagem` TEXT NULL,
   `tipo_visita` TEXT NULL,
@@ -74,39 +74,27 @@ CREATE TABLE IF NOT EXISTS `mydb`.`FormularioVisita` (
   `descricao` TEXT NULL,
   `avaliacao` TEXT NULL,
   `data_preenchimento` DATE NULL,
-  `user` INT NULL,
   PRIMARY KEY (`idFormulario`),
   INDEX `_idx` (`idLocal` ASC),
-  INDEX `fk_FormularioVisita_1_idx` (`user` ASC),
   CONSTRAINT `fk_Formulario_1`
     FOREIGN KEY (`idLocal`)
-    REFERENCES `mydb`.`Local` (`idLocal`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_FormularioVisita_1`
-    FOREIGN KEY (`user`)
-    REFERENCES `mydb`.`curso` (`idcurso`)
+    REFERENCES `blog`.`Local` (`idLocal`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Pessoa`
+-- Table `blog`.`Pessoa`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Pessoa` (
+CREATE TABLE IF NOT EXISTS `blog`.`Pessoa` (
   `cadastro_identificador` INT NOT NULL,
   `nome` TEXT NULL,
   `departamento` TEXT NULL,
-  `funcao` INT NULL,
+  `funcao` TEXT NULL,
   `email` TEXT NULL,
   `confirmacao` TINYINT(1) NULL,
-  PRIMARY KEY (`cadastro_identificador`),
-  CONSTRAINT `fk_Pessoa_1`
-    FOREIGN KEY (`cadastro_identificador`)
-    REFERENCES `mydb`.`FormularioVisita` (`user`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`cadastro_identificador`))
 ENGINE = InnoDB
 INSERT_METHOD = NO
 PACK_KEYS = DEFAULT
@@ -116,9 +104,9 @@ KEY_BLOCK_SIZE = 1;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Usuario`
+-- Table `blog`.`Usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Usuario` (
+CREATE TABLE IF NOT EXISTS `blog`.`Usuario` (
   `idUsuario` INT NOT NULL,
   `login` INT NULL,
   `senha` TEXT NULL,
@@ -126,16 +114,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Usuario` (
   INDEX `fk_Usuario_1_idx` (`login` ASC),
   CONSTRAINT `fk_Usuario_1`
     FOREIGN KEY (`login`)
-    REFERENCES `mydb`.`Pessoa` (`cadastro_identificador`)
+    REFERENCES `blog`.`Pessoa` (`cadastro_identificador`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Materia`
+-- Table `blog`.`Materia`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Materia` (
+CREATE TABLE IF NOT EXISTS `blog`.`Materia` (
   `idMateria` INT NOT NULL,
   `nome` TEXT NULL COMMENT '					',
   `professor` TEXT NULL,
@@ -144,9 +132,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`FormularioSubs`
+-- Table `blog`.`FormularioSubs`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`FormularioSubs` (
+CREATE TABLE IF NOT EXISTS `blog`.`FormularioSubs` (
   `idFormularioSubs` INT NOT NULL,
   `motivo` TEXT NULL,
   `materia` INT NULL,
@@ -162,17 +150,17 @@ CREATE TABLE IF NOT EXISTS `mydb`.`FormularioSubs` (
   INDEX `fk_FormularioSubs_3_idx` (`materia_substituto` ASC),
   CONSTRAINT `fk_FormularioSubs_1`
     FOREIGN KEY (`pessoa`)
-    REFERENCES `mydb`.`Pessoa` (`cadastro_identificador`)
+    REFERENCES `blog`.`Pessoa` (`cadastro_identificador`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_FormularioSubs_2`
     FOREIGN KEY (`materia`)
-    REFERENCES `mydb`.`Materia` (`idMateria`)
+    REFERENCES `blog`.`Materia` (`idMateria`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_FormularioSubs_3`
     FOREIGN KEY (`materia_substituto`)
-    REFERENCES `mydb`.`Materia` (`idMateria`)
+    REFERENCES `blog`.`Materia` (`idMateria`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

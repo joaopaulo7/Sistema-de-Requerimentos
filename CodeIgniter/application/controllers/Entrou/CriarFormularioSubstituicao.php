@@ -11,8 +11,8 @@ class CriarFormularioSubstituicao extends CI_Controller {
         $this->load->library("form_validation");
         $this->load->model("SubstituicaoModel");
         $this->load->library("session");
-        if(!$this->session->userdata("Login")) {
-            redirect("login");
+        if(!$this->session->userdata("idUsuario")) {
+            redirect("login/logout");
         }
     }
     

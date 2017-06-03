@@ -12,7 +12,7 @@ and open the template in the editor.
     </head>
     <body>
         <div>
-            <form method="POST" action="cadastrar/fazercadastro">
+            <form method="POST" action="fazercadastro">
             
             
             	 <?php echo form_error('nome'); ?>
@@ -52,7 +52,7 @@ and open the template in the editor.
                     E mail:
                 </label>
                 <input type="email" id="email" name="email"><br>
-                
+
                 
                 <?php echo form_error('senha'); ?>
                 <label for="Senha">
@@ -61,7 +61,7 @@ and open the template in the editor.
                 <input type="password" name="senha" id="senha"><br>
                 
                 
-                <?php echo form_error('senha'); ?>
+                <?php echo form_error('confsenha'); ?>
                 <label for="Confirmar Senha">
                     Confirmar Senha:
                 </label>

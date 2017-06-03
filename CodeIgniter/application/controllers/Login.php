@@ -29,7 +29,6 @@ class Login extends CI_Controller {
             $resultado = $this->Loginmodel->verificaAcesso($dados);
             if(count($resultado) == 1) {
                 $this->session->set_userdata($resultado[0]);
-                echo "Login efetuado com sucesso!!!";
                 redirect("Entrou/menu");
             } else {
                 echo "Login ou senha incorretos!!!";

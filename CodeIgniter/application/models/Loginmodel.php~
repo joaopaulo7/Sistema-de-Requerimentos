@@ -6,8 +6,8 @@ class Loginmodel extends CI_Model {
     public function __construct() {
         parent::__construct();
     }
-    public function verificaacesso($dados) {
-        $resultado = $this->db->get_where("login",$dados);
+    public function verificaAcesso($dados) {
+        $resultado = $this->db->get_where("Pessoa",$dados);
         return $resultado->result_array();
     }
 }

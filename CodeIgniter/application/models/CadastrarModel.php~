@@ -6,7 +6,12 @@ class CadastrarModel extends CI_Model {
     public function __construct() {
         parent::__construct();
     }
-    public function verificaAcesso($dados) {
-        $resultado = $this->db->set("login",$dados);
+    public function setCadastro($dadosp, $dadosf) {
+    	  $this->db->insert("Pessoa",$dadosp);
+    	  $dadosf['login'] = $dadosp['cadastro_identificador'];
+    	  $this->db->insert("Usuario",array(
+    	  'login'     => $dadosf['login'], 
+    	  'senha'     => $dadosf['senha']));
+
     }
 }
