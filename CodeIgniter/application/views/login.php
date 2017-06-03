@@ -25,7 +25,7 @@ and open the template in the editor.
                     Enviar
                 </button>
             </form>
-            <a href = 'http://127.0.0.1/Sistema-de-Requerimentos/CodeIgniter/index.php/cadastrar'> Cadastrar</a>
+            <?php echo anchor('cadastrar', 'Cadastrar', 'Cadastrar') ?>
         </div>
       </body>
 </html>

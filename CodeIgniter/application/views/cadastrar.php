@@ -61,7 +61,7 @@ and open the template in the editor.
                 <input type="password" name="senha" id="senha"><br>
                 
                 
-                <?php echo form_error('senha'); ?>
+                <?php echo form_error('confsenha'); ?>
                 <label for="Confirmar Senha">
                     Confirmar Senha:
                 </label>

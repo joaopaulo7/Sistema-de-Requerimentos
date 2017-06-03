@@ -21,17 +21,15 @@ class Cadastrar extends CI_Controller {
     
     public function fazerCadastro(){
     	$cadastro = $this->input->post();
-		$cadastrop = $this->input->post(array('nome', 'cadastro_identificador',  'departamento', 'funcao', 'email'));
-		$cadastrof = $this->input->post(array('login', 'senha', 'confsenha'));
 		  
 		  
 		  
-		  $cadastrof['idUsuario'] = rand(0, 10000000);
-		  $this->form_validation->set_data($cadastrof);
+		  $cadastro['idUsuario'] = rand(0, 10000000);
+		  $this->form_validation->set_data($cadastro);
 		  $this->form_validation->set_rules("idUsuario", "Id Usuario", "is_unique[Usuario.idUsuario]", array('is_unique' => 'Erro de aleatoriedade  no %s.'));
 		  while(!$this->form_validation->run()) {
-		  	   $cadastrof['idUsuario'] = rand(0, 1000000);
-		  		$this->form_validation->set_data($cadastrof);
+		  	   $cadastro['idUsuario'] = rand(0, 1000000);
+		  		$this->form_validation->set_data($cadastro);
 		  		$this->form_validation->set_rules("idUsuario", "Id Usuario", "is_unique[Usuario.idUsuario]", array('is_unique' => 'Erro de aleatoriedade  no %s.'));
 		  }
 		  
@@ -39,18 +37,21 @@ class Cadastrar extends CI_Controller {
         $this->form_validation->set_data($cadastro);
         
         
-        $this->form_validation->set_rules("nome", "Nome", "required", array('required' => 'Você não escreveu o %s.'));
+        $this->form_validation->set_rules("nome", "Nome", "required", array(
+                'required' => 'Você não escreveu o %s.'));
               	  
       	  
         $this->form_validation->set_rules("cadastro_identificador", "Cadastro Identificador", "required|is_unique[Pessoa.cadastro_identificador]", array(
-              'required'      => 'Você não escreveu o %s.',
-              'is_unique'     => 'Esse %s já existe.'));
+                'required'      => 'Você não escreveu o %s.',
+                'is_unique'     => 'Esse %s já existe.'));
                 
                 
-        $this->form_validation->set_rules("departamento", "Departamento", "required", array('required'      => 'Você não escreveu o %s.'));
+        $this->form_validation->set_rules("departamento", "Departamento", "required", array(
+                'required'      => 'Você não escreveu o %s.'));
         
         
-        $this->form_validation->set_rules("funcao", "Função", "required", array('required'      => 'Você não escreveu o %s.'));
+        $this->form_validation->set_rules("funcao", "Função", "required", array(
+                'required'      => 'Você não escreveu o %s.'));
         
         
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[Pessoa.email]', array(
@@ -59,19 +60,21 @@ class Cadastrar extends CI_Controller {
                 'is_unique'     => 'Esse %s já existe.'));
         
         
-     	  $this->form_validation->set_rules("senha", "Senha", "required", array('required'      => 'Você não escreveu o %s.'));
+     	  $this->form_validation->set_rules("senha", "Senha", "required", array(
+     	        'required'      => 'Você não escreveu o %s.'));
         
         
         $this->form_validation->set_rules('confsenha', 'Confirmar Senha', 'required|matches[senha]',array(
-        			'required'      => 'Você não escreveu o %s.',
-        			'matches'       => 'As senhas não são iguais'));
+        	    'required'      => 'Você não escreveu o %s.',
+        		'matches'       => 'As senhas não são iguais'));
         
         
         if( $this->form_validation->run()) {
-      	    $cadastrof["senha"] = sha1($cadastrof["senha"]);
-  	  	   	 $this->CadastrarModel->setCadastro($cadastrop, $cadastrof);
-      	    redirect('login');
+      	    $cadastro["senha"] = sha1($cadastro["senha"]);
+  	  	   	$this->CadastrarModel->setCadastro($cadastro);
+      	    $this->load->view('cadastroEfetuado');
       	  }
+      	else
         $this->load->view('erroCadastro');
 	 }
 }

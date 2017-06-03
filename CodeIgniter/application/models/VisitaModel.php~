@@ -7,6 +7,6 @@ class VisitaModel extends CI_Model {
         parent::__construct();
     }
     public function setCadastro($dados) {
-        $resultado = $this->db->insert("login",$dados);
+        $resultado = $this->db->insert("FormularioVisita",$dados);
     }
 }
