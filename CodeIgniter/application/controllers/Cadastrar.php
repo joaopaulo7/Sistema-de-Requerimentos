@@ -18,9 +18,37 @@ class Cadastrar extends CI_Controller {
     public function index() {
 		$this->load->view('cadastrar');
     }
+
+
+    public function mandarEmailConf($usuario, $email){
+    	
+    	  $config = array(
+ 	 	 'protocol' => 'smtp',
+ 	 	 'smtp_host'=> 'ssl://smtp.googlemail.com',
+ 	 	 'smtp_port'=> 465,
+ 	 	 'smtp_user'=> 'sistemarequerimentoscefetvga@gmail.com',
+ 	 	 'smtp_pass'=> 'nem pense',
+ 		 'mailtype' => 'html',
+		 'charset'  => 'iso-8859-1',
+		 'wordwrap' => TRUE
+		);
+		
+	 	$this->load->library("email", $config);
+    	$this->email->from('sistemarequerimentoscefetvga@gmail.com', 'Sistema Requerimentos CEFET -Varginha');
+		$this->email->to($email);
+
+		$this->email->subject('Confirmação de Usuario');
+		$this->email->message(site_url('/confirmaEmail/'.$usuario));
+
+  		if (!$this->email->send()) {
+   	 	show_error($this->email->print_debugger()); }
+ 	   else {
+   		echo 'Your e-mail has been sent!';
+	 	}
+    }
     
     public function fazerCadastro(){
-    	$cadastro = $this->input->post();
+    	  $cadastro = $this->input->post();
 		  
 		  
 		  
@@ -71,10 +99,11 @@ class Cadastrar extends CI_Controller {
         
         if( $this->form_validation->run()) {
       	    $cadastro["senha"] = sha1($cadastro["senha"]);
-  	  	   	$this->CadastrarModel->setCadastro($cadastro);
+  	  	   	 $this->CadastrarModel->setCadastro($cadastro);
+  	  	   	 $this->mandarEmailConf( $cadastro['idUsuario'], $cadastro['email']);
       	    $this->load->view('cadastroEfetuado');
       	  }
       	else
-        $this->load->view('erroCadastro');
+             $this->load->view('erroCadastro');
 	 }
 }

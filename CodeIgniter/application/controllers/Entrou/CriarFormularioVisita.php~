@@ -22,7 +22,7 @@ class CriarFormularioVisita extends CI_Controller {
     public function fazerFormulario(){
     	$cadastro = $this->input->post();
 		  
-		  
+		$cadastro['proponente_da_viagem'] = $this->session->userdata("login");
 		  
 		 $cadastro['idFormulario'] = rand(0, 10000000);
 		 $this->form_validation->set_data($cadastro);
@@ -77,6 +77,8 @@ class CriarFormularioVisita extends CI_Controller {
         
         
         if( $this->form_validation->run()) {
+        		 echo date("Y-m-d");
+        		 $cadastro['data_preenchimento'] = date("Y-m-d");
   	  	   	 $this->VisitaModel->setFormulario($cadastro);
       	    $this->load->view('Entrou/requisicaoEfetuada');
       	  }

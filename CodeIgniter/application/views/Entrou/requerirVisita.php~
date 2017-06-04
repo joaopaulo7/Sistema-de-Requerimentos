@@ -24,6 +24,16 @@ and open the template in the editor.
                 <input type="text" id="tipo_visita" name="tipo_visita"><br>
                 
                 
+                <!-- O Local deve ser feio por meio de 
+                dropdowns tendo os nomes pré determinados-->
+            	<?php echo form_error('local'); ?>
+                <label for="Local ">
+                    Local:
+                </label>
+                <input type="text" id="local" name="local"><br>
+                
+                
+                
                 <?php echo form_error('data'); ?>
                 <label for="Data">
                     Data:
@@ -38,32 +48,32 @@ and open the template in the editor.
                 <input type="text" id="transporte" name="transporte"><br>
                 
                 
-                <?php echo form_error('horario_de_saida'); ?>
+                <?php echo form_error('horario_saida'); ?>
                 <label for="Horario de Saída">
                     Horario de Saída:
                 </label>
-                <input type="text" id="horario_de_saida" name="horario_de_saida"><br>                
+                <input type="text" id="horario_saida" name="horario_saida"><br>                
                 
                 
-                <?php echo form_error('horario_de_chegada'); ?>
+                <?php echo form_error('horario_chegada'); ?>
                 <label for="Horario de Chegada">
                     Horario de Chegada:
                 </label>
-                <input type="text" id="horario_de_chegada" name="horario_de_chegada"><br>
+                <input type="text" id="horario_chegada" name="horario_chegada"><br>
                                 
                 
-                <?php echo form_error('local_de_saida'); ?>
+                <?php echo form_error('local_saida'); ?>
                 <label for="Local de Saída">
                     Local de Saída:
                 </label>
-                <input type="text" id="local_de_saida" name="local_de_saida"><br>                
+                <input type="text" id="local_saida" name="local_saida"><br>                
                 
                 
-                <?php echo form_error('local_de_chegada'); ?>
+                <?php echo form_error('local_chegada'); ?>
                 <label for="Local de Chegada">
                     Local de Chegada:
                 </label>
-                <input type="text" id="local_de_chegada" name="local_de_chegada"><br>
+                <input type="text" id="local_chegada" name="local_chegada"><br>
                 
                 
                 <?php echo form_error('justificativa'); ?>

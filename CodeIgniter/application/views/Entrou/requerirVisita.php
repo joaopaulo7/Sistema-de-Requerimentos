@@ -24,6 +24,16 @@ and open the template in the editor.
                 <input type="text" id="tipo_visita" name="tipo_visita"><br>
                 
                 
+                <!-- O Local deve ser feio por meio de 
+                dropdowns tendo os nomes pré determinados-->
+            	<?php echo form_error('idlocal'); ?>
+                <label for="Local ">
+                    Local:
+                </label>
+                <input type="text" id="idlocal" name="idlocal"><br>
+                
+                
+                
                 <?php echo form_error('data'); ?>
                 <label for="Data">
                     Data:
