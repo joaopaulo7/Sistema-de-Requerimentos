@@ -22,4 +22,10 @@ class CadastrarModel extends CI_Model {
     	  'senha'     => $dados['senha']));
 
     }
+    public function confirma($usuario) {
+		  $cadastro = $this->db->get_where('Usuario', 'idUsuario = '.$usuario);
+		  //$this->db->where('Pessoa', 'cadastroIdentificador ='.$cadastro['login']);
+		  $this->db->update("Pessoa", array(
+		  'confirmacao'=> 1),'cadastroIdentificador ='.$cadastro->login);
+	}
 }

@@ -21,29 +21,39 @@ class Cadastrar extends CI_Controller {
 
 
     public function mandarEmailConf($usuario, $email){
-    	
-    	  $config = array(
- 	 	 'protocol' => 'smtp',
- 	 	 'smtp_host'=> 'ssl://smtp.googlemail.com',
- 	 	 'smtp_port'=> 465,
- 	 	 'smtp_user'=> 'sistemarequerimentoscefetvga@gmail.com',
- 	 	 'smtp_pass'=> 'nem pense',
- 		 'mailtype' => 'html',
-		 'charset'  => 'iso-8859-1',
-		 'wordwrap' => TRUE
-		);
 		
-	 	$this->load->library("email", $config);
+		$html = " <!DOCTYPE html>
+				<!--
+				To change this license header, choose License Headers in Project Properties.
+				To change this template file, choose Tools | Templates
+				and open the template in the editor.
+				-->
+				<html>
+					<head>
+						<title>Login Sis.Req</title>
+						<meta charset='UTF-8'>
+						<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+					</head>
+					<body>
+						<h1>Um cadastro foi efetuado nessa conta, <br>para confirmar, clique em 'Confirmar'</h1>
+						".anchor('Cadastrar/confirmaEmail/'.$usuario, 'Confirmar', 'Confirmar')."
+					</body>
+				</html>
+				";
+		
+		
+		$this->load->library("email");
+		
     	$this->email->from('sistemarequerimentoscefetvga@gmail.com', 'Sistema Requerimentos CEFET -Varginha');
 		$this->email->to($email);
 
 		$this->email->subject('Confirmação de Usuario');
-		$this->email->message(site_url('/confirmaEmail/'.$usuario));
+		$this->email->message($html);
 
   		if (!$this->email->send()) {
-   	 	show_error($this->email->print_debugger()); }
- 	   else {
-   		echo 'Your e-mail has been sent!';
+			show_error($this->email->print_debugger()); }
+ 	    else {
+			echo 'Your e-mail has been sent!';
 	 	}
     }
     
@@ -99,11 +109,16 @@ class Cadastrar extends CI_Controller {
         
         if( $this->form_validation->run()) {
       	    $cadastro["senha"] = sha1($cadastro["senha"]);
-  	  	   	 $this->CadastrarModel->setCadastro($cadastro);
-  	  	   	 $this->mandarEmailConf( $cadastro['idUsuario'], $cadastro['email']);
+      	    $this->mandarEmailConf( $cadastro['idUsuario'], $cadastro['email']);
+  	  	   	$this->CadastrarModel->setCadastro($cadastro);
       	    $this->load->view('cadastroEfetuado');
       	  }
       	else
              $this->load->view('erroCadastro');
+	 }
+	 
+	 public function confirmaEmail($usuario){
+			$this->CadastrarModel->confirma($usuario);
+			
 	 }
 }
