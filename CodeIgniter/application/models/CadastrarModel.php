@@ -23,9 +23,9 @@ class CadastrarModel extends CI_Model {
 
     }
     public function confirma($usuario) {
-		  $cadastro = $this->db->get_where('Usuario', 'idUsuario = '.$usuario);
-		  //$this->db->where('Pessoa', 'cadastroIdentificador ='.$cadastro['login']);
-		  $this->db->update("Pessoa", array(
-		  'confirmacao'=> 1),'cadastroIdentificador ='.$cadastro->login);
+		  $cadastro = $this->db->get_where('Usuario', array('idUsuario' => $usuario));
+		  $cadastro = $cadastro->result_object()[0];
+		  $this->db->where('cadastro_identificador', $cadastro->login);
+		  $this->db->update("Pessoa", array('confirmacao'=> 1));
 	}
 }

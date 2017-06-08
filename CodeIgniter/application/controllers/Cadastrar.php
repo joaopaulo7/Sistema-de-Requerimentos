@@ -51,9 +51,7 @@ class Cadastrar extends CI_Controller {
 		$this->email->message($html);
 
   		if (!$this->email->send()) {
-			show_error($this->email->print_debugger()); }
- 	    else {
-			echo 'Your e-mail has been sent!';
+			show_error($this->email->print_debugger()); 
 	 	}
     }
     
@@ -119,6 +117,6 @@ class Cadastrar extends CI_Controller {
 	 
 	 public function confirmaEmail($usuario){
 			$this->CadastrarModel->confirma($usuario);
-			
+			redirect('login');
 	 }
 }

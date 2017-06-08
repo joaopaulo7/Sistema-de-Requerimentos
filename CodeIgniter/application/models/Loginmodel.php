@@ -10,6 +10,11 @@ class Loginmodel extends CI_Model {
         $this->db->where('login', $dados['login']);
         $this->db->where('senha', $dados['senha']);
         $resultado = $this->db->get('Usuario'); 
-        return $resultado->result_array();
+        
+        $this->db->where('cadastro_identificador', $dados['login']);
+        $this->db->where('confirmacao', 1);
+        $this->db->from('Pessoa');
+        if($this->db->count_all_results() == 1)
+			return $resultado->result_array();
     }
 }
