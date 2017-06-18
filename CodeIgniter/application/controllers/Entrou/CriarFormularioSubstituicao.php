@@ -15,6 +15,41 @@ class CriarFormularioSubstituicao extends CI_Controller {
         }
     }
     
+    public function mandarEmailConf($usuario, $email){
+		
+		$html = " <!DOCTYPE html>
+				<!--
+				To change this license header, choose License Headers in Project Properties.
+				To change this template file, choose Tools | Templates
+				and open the template in the editor.
+				-->
+				<html>
+					<head>
+						<title>Login Sis.Req</title>
+						<meta charset='UTF-8'>
+						<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+					</head>
+					<body>
+						<h1>Um cadastro foi efetuado nessa conta, <br>para confirmar, clique em 'Confirmar'</h1>
+						".anchor('Cadastrar/confirmaEmail/'.$usuario, 'Confirmar', 'Confirmar')."
+					</body>
+				</html>
+				";
+		
+		
+		$this->load->library("email");
+		
+    	$this->email->from('sistemarequerimentoscefetvga@gmail.com', 'Sistema Requerimentos CEFET -Varginha');
+		$this->email->to($email);
+
+		$this->email->subject('Confirmação de Usuario');
+		$this->email->message($html);
+
+  		if (!$this->email->send()) {
+			show_error($this->email->print_debugger()); 
+	 	}
+    }
+    
     public function index() {
 		$this->load->view('Entrou/requerirSubs');
     }
@@ -59,9 +94,9 @@ class CriarFormularioSubstituicao extends CI_Controller {
         
         if( $this->form_validation->run()) {
   	  	   	$this->SubstituicaoModel->setFormulario($cadastro);
-      	    $this->load->view('Entrou/requisicaoEfetuada');
-      	  }
-      	else
-        $this->load->view('Entrou/erroFomularioSubstituicao');
+  	  	   	redirect('Entrou/controladorRequisitos/criadoSubs/'.$cadastro['idFormularioSubs']);
+        }
+        else
+        		$this->load->view('Entrou/erroFomularioSubstituicao');
 	 }
 }

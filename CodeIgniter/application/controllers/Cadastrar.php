@@ -90,10 +90,10 @@ class Cadastrar extends CI_Controller {
                 'required'      => 'Você não escreveu o %s.'));
         
         
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[Pessoa.email]', array(
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email'/*|is_unique[Pessoa.email]'*/, array(
                 'required'      => 'Você não escreveu o %s.',
-                'valid_email'   => 'Esse %s não é válido.',
-                'is_unique'     => 'Esse %s já existe.'));
+                'valid_email'   => 'Esse %s não é válido.'/*,
+                'is_unique'     => 'Esse %s já existe.'*/));
         
         
      	  $this->form_validation->set_rules("senha", "Senha", "required", array(

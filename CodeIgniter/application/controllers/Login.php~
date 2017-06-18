@@ -13,11 +13,12 @@ class Login extends CI_Controller {
     }
 
     public function index() {
+    	  $link=' ';
         $this->session->sess_destroy();
         $this->load->view('login');
     }
     
-    public function login() {
+    public function login($link = "Entrou/menu") {
         $dados = $this->input->post();
         $this->form_validation->set_data($dados);
         $this->form_validation->set_rules("login", "Login", "required");
@@ -29,8 +30,7 @@ class Login extends CI_Controller {
             $resultado = $this->Loginmodel->verificaAcesso($dados);
             if(count($resultado) == 1) {
                 $this->session->set_userdata($resultado[0]);
-                echo "Login efetuado com sucesso!!!";
-                redirect("Entrou/menu");
+                redirect($link);
             } else {
                 echo "Login ou senha incorretos!!!";
             }                

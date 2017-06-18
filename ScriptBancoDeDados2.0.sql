@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `blog`.`Pessoa` (
   `cadastro_identificador` BIGINT NOT NULL,
   `nome` TEXT NULL,
   `departamento` TEXT NULL,
-  `funcao` INT NULL,
+  `funcao` TEXT NULL,
   `email` TEXT NULL,
   `confirmacao` TINYINT(1) NULL,
   PRIMARY KEY (`cadastro_identificador`))
@@ -138,6 +138,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `blog`.`FormularioSubs` (
   `idFormularioSubs` INT NOT NULL,
   `professor_substituto` BIGINT NULL,
+  `coordenador` BIGINT NULL,
   `materia` INT NULL,
   `motivo` TEXT NULL,
   `data_da_substituicao` DATE NULL,
@@ -145,6 +146,7 @@ CREATE TABLE IF NOT EXISTS `blog`.`FormularioSubs` (
   PRIMARY KEY (`idFormularioSubs`),
   INDEX `fk_FormularioSubs_1_idx` (`professor_substituto` ASC),
   INDEX `fk_FormularioSubs_2_idx` (`materia` ASC),
+  INDEX `fk_FormularioSubs_3_idx` (`coordenador` ASC),
   CONSTRAINT `fk_FormularioSubs_1`
     FOREIGN KEY (`professor_substituto`)
     REFERENCES `blog`.`Pessoa` (`cadastro_identificador`)
@@ -153,6 +155,11 @@ CREATE TABLE IF NOT EXISTS `blog`.`FormularioSubs` (
   CONSTRAINT `fk_FormularioSubs_2`
     FOREIGN KEY (`materia`)
     REFERENCES `blog`.`Materia` (`idMateria`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_FormularioSubs_3`
+    FOREIGN KEY (`coordenador`)
+    REFERENCES `blog`.`Pessoa` (`cadastro_identificador`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
