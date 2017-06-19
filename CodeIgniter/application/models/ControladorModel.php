@@ -10,12 +10,12 @@ class ControladorModel extends CI_Model{
     public function getProfessor($id){
     	$this->db->where('cadastro_identificador', $id);
     	$pessoa = $this->db->get('Pessoa');
-    	$pessoa = $pessoa->result_object();
+    	$pessoa = $pessoa->result_object()[0];
     	return $pessoa;
     }
     
     public function getCoorSubs($idform){
-    	$this->db->where('idFormularioSubs', $id);
+    	$this->db->where('idFormularioSubs', $idform);
     	$formulario = $this->db->get('FormularioSubs');
     	$formulario = $formulario->result_object()[0];
     	$this->db->where('idMateria', $formulario->materia);
@@ -23,7 +23,7 @@ class ControladorModel extends CI_Model{
     	$materia = $materia->result_object()[0];
     	$this->db->where('departamento', $materia->curso);
     	$this->db->where('funcao', 'Coordenador');
-    	return $this->db->get('Pessoa');
+    	return $this->db->get('Pessoa')->result_object()[0];
     }
     
     public function getCoorVis($idform){
@@ -52,12 +52,12 @@ class ControladorModel extends CI_Model{
     
     public function setProfessor($idform, $id){
     	$this->db->where('idFormularioSubs', $idform);
-    	return $this->db->update('FormularioSubs', array('Professor'=>$id));
+    	return $this->db->update('FormularioSubs', array('professor_substituto'=>$id));
     }
     
     public function setCoorSubs($idform, $id){
     	$this->db->where('idFormularioSubs', $idform);
-    	return $this->db->update('FormularioSubs', array('conf_coordenador'=>$id));
+    	return $this->db->update('FormularioSubs', array('coordenador'=>$id));
     }
     
     public function setCoorVis($idform, $id){

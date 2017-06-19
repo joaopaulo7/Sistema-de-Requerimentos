@@ -156,9 +156,9 @@ class ControladorRequisitos extends CI_Controller {
     }
         
     
-	 public function criadoSubs($id){
+	 public static function criadoSubs($idform, $id){
 	 		$confuser = $this->ControladorModel->getProfessor($id);
-	 		$this->mandarEmailConfProf($confuser->id, $confuser->email);
+	 		$this->mandarEmailConfProf($idform, $confuser->email);
 		   $this->load->view('Entrou/requisicaoEfetuada');
     }
     
@@ -169,15 +169,15 @@ class ControladorRequisitos extends CI_Controller {
     }
     
     
-    public function confirmarProf($idfor){
-	 		$this->ControladorModel->setProfessor($idfor, $this->session->userdata('idUsuario'));
-	 		$confuser = $this->ControladorModel->getCoorSubs($idfor);
-	 		$this->mandarEmailConfCoorSubs($confuser['id'], $confuser['email']);
+    public function confirmarProf($idform){
+	 		$this->ControladorModel->setProfessor($idform, $this->session->userdata('login'));
+	 		$confuser = $this->ControladorModel->getCoorSubs($idform);
+	 		$this->mandarEmailConfCoorSubs($idform, $confuser->email);
 	 		$this->load->view('Entrou/requisicaoEfetuada');
     }
     
     public function confirmarCoorSubs($idfor){
-	 		$this->ControladorModel->setCoorSubs($idfor, $this->session->userdata('idUsuario'));
+	 		$this->ControladorModel->setCoorSubs($idfor, $this->session->userdata('login'));
 			$this->load->view('Entrou/requisicaoEfetuada');
 	 		  
     }

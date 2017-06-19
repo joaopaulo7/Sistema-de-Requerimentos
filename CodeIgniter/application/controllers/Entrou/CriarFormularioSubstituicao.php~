@@ -59,13 +59,13 @@ class CriarFormularioSubstituicao extends CI_Controller {
 		  
 		  
 		  
-		 $cadastro['idFormularioSubs'] = rand(0, 10000000);
-		 $this->form_validation->set_data($cadastro);
+		  $cadastro['idFormularioSubs'] = rand(0, 10000000);
+		  $this->form_validation->set_data($cadastro);
 	     $this->form_validation->set_rules("idFormularioSubs", "Id Formulario Subs", "is_unique[FormularioSubs.idFormularioSubs]", array('is_unique' => 'Erro de aleatoriedade  no %s.'));
 	     while(!$this->form_validation->run()) {
 	  	    $cadastro['idFormularioSubs'] = rand(0, 1000000);
-			$this->form_validation->set_data($cadastro);
-	 		$this->form_validation->set_rules("idFormularioSubs", "Id Formulario Subs", "is_unique[FormularioSubs.idFormularioSubs]", array('is_unique' => 'Erro de aleatoriedade  no %s.'));
+			 $this->form_validation->set_data($cadastro);
+	 		 $this->form_validation->set_rules("idFormularioSubs", "Id Formulario Subs", "is_unique[FormularioSubs.idFormularioSubs]", array('is_unique' => 'Erro de aleatoriedade  no %s.'));
 		 }
 		  
 		  
@@ -88,13 +88,15 @@ class CriarFormularioSubstituicao extends CI_Controller {
                 'required'      => 'Você não escreveu o %s.'));
         
         
-     	$this->form_validation->set_rules("horario_substituicao", "Horario Substituicao", "required", array(
+        $this->form_validation->set_rules("horario_substituicao", "Horario Substituicao", "required", array(
      	        'required'      => 'Você não escreveu o %s.'));
         
         
         if( $this->form_validation->run()) {
-  	  	   	$this->SubstituicaoModel->setFormulario($cadastro);
-  	  	   	redirect('Entrou/controladorRequisitos/criado/'.$cadastro['idFormularioSubs']);
+        		$prof = $cadatro['professor_substituto'];
+        		$cadatro['professor_substituto'] = null;
+        		$this->SubstituicaoModel->setFormulario($cadastro);
+        		redirect('Entrou/controladorRequisitos/criadoSubs/'.$cadastro['idFormularioSubs'].'/'.$prof);
         }
         else
         		$this->load->view('Entrou/erroFomularioSubstituicao');
