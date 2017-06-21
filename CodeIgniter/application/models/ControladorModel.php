@@ -27,27 +27,27 @@ class ControladorModel extends CI_Model{
     }
     
     public function getCoorVis($idform){
-    	$this->db->where('idFormulario', $id);
-    	$formulario = $this->db->get('Formulario');
+    	$this->db->where('idFormulario', $idform);
+    	$formulario = $this->db->get('FormularioVisita');
     	$formulario = $formulario->result_object()[0];
-    	$this->db->where('cadastro_identificador', $formulario->propoente_da_viagem);
+    	$this->db->where('cadastro_identificador', $formulario->proponente_da_viagem);
     	$propoente = $this->db->get('Pessoa');
     	$propoente = $propoente->result_object()[0];
     	$this->db->where('departamento', $propoente->departamento);
     	$this->db->where('funcao', 'Coordenador');
-    	return $this->db->get('Pessoa');
+    	return $this->db->get('Pessoa')->result_object()[0];
     }
     
     public function getDirVis($idform){
-    	$this->db->where('idFormulario', $id);
-    	$formulario = $this->db->get('Formulario');
+    	$this->db->where('idFormulario', $idform);
+    	$formulario = $this->db->get('FormularioVisita');
     	$formulario = $formulario->result_object()[0];
-    	$this->db->where('cadastro_identificador', $formulario->propoente_da_viagem);
+    	$this->db->where('cadastro_identificador', $formulario->proponente_da_viagem);
     	$propoente = $this->db->get('Pessoa');
     	$propoente = $propoente->result_object()[0];
     	$this->db->where('departamento', $propoente->departamento);
     	$this->db->where('funcao', 'Diretor');
-    	return $this->db->get('Pessoa');
+    	return $this->db->get('Pessoa')->result_object()[0];
     }
     
     public function setProfessor($idform, $id){
@@ -62,11 +62,11 @@ class ControladorModel extends CI_Model{
     
     public function setCoorVis($idform, $id){
     	$this->db->where('idFormulario', $idform);
-    	return $this->db->update('Formulario', array('conf_coordenador'=>$id));
+    	return $this->db->update('FormularioVisita', array('conf_coordenador'=>$id));
     }
     
     public function setDirVis($idform, $id){
     	$this->db->where('idFormulario', $idform);
-    	return $this->db->update('Formulario', array('conf_diretor'=>$id));
+    	return $this->db->update('FormularioVisita', array('conf_diretor'=>$id));
     }
 }

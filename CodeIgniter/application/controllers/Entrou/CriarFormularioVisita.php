@@ -79,7 +79,7 @@ class CriarFormularioVisita extends CI_Controller {
         if( $this->form_validation->run()) {
         		 $cadastro['data_preenchimento'] = date("Y-m-d");
   	  	   	 $this->VisitaModel->setFormulario($cadastro);
-      	    $this->load->view('Entrou/requisicaoEfetuada');
+      	    redirect('Entrou/controladorRequisitos/criadoVis/'.$cadastro['idFormulario']);
       	  }
       	else
         $this->load->view('Entrou/erroFomularioVisita');

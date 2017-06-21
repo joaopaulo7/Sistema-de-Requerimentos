@@ -3,7 +3,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CI_Controller {
-    public function __construct() {
+    public function __construct($link) {
         parent::__construct();
         $this->load->database();
         $this->load->helper(array("form","url"));
@@ -18,7 +18,7 @@ class Login extends CI_Controller {
         $this->load->view('login');
     }
     
-    public function login($link = "Entrou/menu") {
+    public function login($link = 'Entrou/menu') {
         $dados = $this->input->post();
         $this->form_validation->set_data($dados);
         $this->form_validation->set_rules("login", "Login", "required");
@@ -37,6 +37,9 @@ class Login extends CI_Controller {
         }
     }
     
+    public function loginEsp($link) {
+			$this->load->view('login', $link);
+    }
     public function logout() {
         redirect("/login");
     }

@@ -10,11 +10,11 @@ class ControladorRequisitos extends CI_Controller {
         $this->load->library("session");
         $this->load->model("ControladorModel");
         if(!$this->session->userdata("idUsuario")) {
-            redirect("login");
+            redirect("loginEsp/".current_url());
         }
     }
     
-    public function mandarEmailConfProf($id, $email){
+    private function mandarEmailConfProf($id, $email){
 		
 		$html = " <!DOCTYPE html>
 				<!--
@@ -49,7 +49,7 @@ class ControladorRequisitos extends CI_Controller {
 	 	}
     }
         
-    public function mandarEmailConfCoorSubs($id, $email){
+    private function mandarEmailConfCoorSubs($id, $email){
 
 		
 		$html = " <!DOCTYPE html>
@@ -85,7 +85,7 @@ class ControladorRequisitos extends CI_Controller {
 	 	}
     }
     
-    public function mandarEmailConfCoorVis($id, $email){
+    private function mandarEmailConfCoorVis($id, $email){
 		
 		$html = " <!DOCTYPE html>
 				<!--
@@ -120,7 +120,7 @@ class ControladorRequisitos extends CI_Controller {
 	 	}
     }
 
-    public function mandarEmailConfDirVis($id, $email){
+    private function mandarEmailConfDirVis($id, $email){
 		
 		$html = " <!DOCTYPE html>
 				<!--
@@ -164,7 +164,7 @@ class ControladorRequisitos extends CI_Controller {
     
     public function criadoVis($id){
 	 		$confuser = $this->ControladorModel->getCoorVis($id);
-	 		$this->mandarEmailConfCoorVis($confuser['id'], $confuser['email']);
+	 		$this->mandarEmailConfCoorVis($id, $confuser->email);
 		   $this->load->view('Entrou/requisicaoEfetuada');
     }
     
@@ -176,21 +176,21 @@ class ControladorRequisitos extends CI_Controller {
 	 		$this->load->view('Entrou/requisicaoEfetuada');
     }
     
-    public function confirmarCoorSubs($idfor){
-	 		$this->ControladorModel->setCoorSubs($idfor, $this->session->userdata('login'));
+    public function confirmarCoorSubs($idform){
+	 		$this->ControladorModel->setCoorSubs($idform, $this->session->userdata('login'));
 			$this->load->view('Entrou/requisicaoEfetuada');
 	 		  
     }
     
-    public function confirmarCoorVis($idfor){
-	 		$this->ControladorModel->setCoorVis($idfor, $this->session->userdata('idUsuario'));
-	 		$confuser = $this->ControladorModel->getDirVis($idfor);
-	 		$this->mandarEmailConfDirVis($confuser['id'], $confuser['email']);
+    public function confirmarCoorVis($idform){
+	 		$this->ControladorModel->setCoorVis($idform, $this->session->userdata('login'));
+	 		$confuser = $this->ControladorModel->getDirVis($idform);
+	 		$this->mandarEmailConfDirVis($idform, $confuser->email);
 	 		$this->load->view('Entrou/requisicaoEfetuada');
     }
     
-    public function confirmarDirVis($idfor){
-	 		$this->ControladorModel->setDirVis($idfor, $this->session->userdata('idUsuario'));
+    public function confirmarDirVis($idform){
+	 		$this->ControladorModel->setDirVis($idform, $this->session->userdata('login'));
 	 		$this->load->view('Entrou/requisicaoEfetuada');
     }
  }
