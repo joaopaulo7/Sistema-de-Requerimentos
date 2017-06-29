@@ -1,7 +1,6 @@
 <?php
 $config['useragent'] = 'CodeIgniter';
 $config['protocol'] = 'smtp';
-//$config['mailpath'] = '/usr/sbin/sendmail';
 $config['smtp_host'] = 'ssl://smtp.googlemail.com';
 $config['smtp_user'] = 'sistemarequerimentoscefetvga@gmail.com';
 $config['smtp_pass'] = 'Eterna contradicao humana';

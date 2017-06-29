@@ -1,17 +1,8 @@
--- MySQL Workbench Forward Engineering
-
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
--- -----------------------------------------------------
--- Schema blog
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema blog
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `blog` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `blog` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 USE `blog` ;
 
 -- -----------------------------------------------------
@@ -19,10 +10,10 @@ USE `blog` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `blog`.`Pessoa` (
   `cadastro_identificador` BIGINT NOT NULL,
-  `nome` TEXT NULL,
-  `departamento` TEXT NULL,
-  `funcao` TEXT NULL,
-  `email` TEXT NULL,
+  `nome` VARCHAR(45) NULL,
+  `departamento` VARCHAR(20) NULL,
+  `funcao` VARCHAR(20) NULL,
+  `email` VARCHAR(129) NULL,
   `confirmacao` TINYINT(1) NULL,
   PRIMARY KEY (`cadastro_identificador`))
 ENGINE = InnoDB
@@ -37,11 +28,11 @@ KEY_BLOCK_SIZE = 1;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `blog`.`Local` (
   `idLocal` INT NOT NULL,
-  `nome` TEXT NULL,
-  `rua` TEXT NULL,
+  `nome` VARCHAR(45) NULL,
+  `rua` VARCHAR(45) NULL,
   `numero` INT NULL,
-  `bairro` TEXT NULL,
-  `cidade` TEXT NULL,
+  `bairro` VARCHAR(45) NULL,
+  `cidade` VARCHAR(45) NULL,
   PRIMARY KEY (`idLocal`))
 ENGINE = InnoDB;
 
@@ -52,29 +43,29 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `blog`.`FormularioVisita` (
   `idFormulario` INT NOT NULL,
   `proponente_da_viagem` BIGINT NULL,
-  `conf_coordenador` BIGINT NULL,
-  `conf_diretor` BIGINT NULL,
-  `idLocal` INT NULL,
-  `tipo_visita` TEXT NULL,
+  `coordenador` BIGINT NULL,
+  `diretor` BIGINT NULL,
+  `local` INT NULL,
+  `tipo_visita` VARCHAR(20) NULL,
   `data` DATE NULL,
-  `transporte` TEXT NULL,
+  `transporte` VARCHAR(30) NULL,
   `horario_saida` TIME NULL,
   `horario_chegada` TIME NULL,
-  `local_chegada` TEXT NULL,
-  `local_saida` TEXT NULL,
+  `local_chegada` VARCHAR(100) NULL,
+  `local_saida` VARCHAR(100) NULL,
   `justificativa` TEXT NULL,
-  `objetivo_geral` TEXT NULL,
-  `objetivo_especifico` TEXT NULL,
+  `objetivo_geral` VARCHAR(100) NULL,
+  `objetivo_especifico` VARCHAR(100) NULL,
   `descricao` TEXT NULL,
-  `avaliacao` TEXT NULL,
+  `avaliacao` VARCHAR(45) NULL,
   `data_preenchimento` DATE NULL,
   PRIMARY KEY (`idFormulario`),
-  INDEX `_idx` (`idLocal` ASC),
+  INDEX `_idx` (`local` ASC),
   INDEX `fk_FormularioVisita_propoente_idx` (`proponente_da_viagem` ASC),
-  INDEX `fk_FormularioVisita_coordenador_idx` (`conf_coordenador` ASC),
-  INDEX `fk_FormularioVisita_diretor_idx` (`conf_diretor` ASC),
+  INDEX `fk_FormularioVisita_coordenador_idx` (`coordenador` ASC),
+  INDEX `fk_FormularioVisita_diretor_idx` (`diretor` ASC),
   CONSTRAINT `fk_FormularioVisita_local`
-    FOREIGN KEY (`idLocal`)
+    FOREIGN KEY (`local`)
     REFERENCES `blog`.`Local` (`idLocal`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -84,12 +75,12 @@ CREATE TABLE IF NOT EXISTS `blog`.`FormularioVisita` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_FormularioVisita_coordenador`
-    FOREIGN KEY (`conf_coordenador`)
+    FOREIGN KEY (`coordenador`)
     REFERENCES `blog`.`Pessoa` (`cadastro_identificador`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_FormularioVisita_diretor`
-    FOREIGN KEY (`conf_diretor`)
+    FOREIGN KEY (`diretor`)
     REFERENCES `blog`.`Pessoa` (`cadastro_identificador`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -102,7 +93,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `blog`.`Usuario` (
   `idUsuario` INT NOT NULL,
   `login` BIGINT NULL,
-  `senha` TEXT NULL,
+  `senha` VARCHAR(64) NULL,
   PRIMARY KEY (`idUsuario`),
   INDEX `fk_Usuario_1_idx` (`login` ASC),
   CONSTRAINT `fk_Usuario_1`
@@ -119,7 +110,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `blog`.`Materia` (
   `idMateria` INT NOT NULL,
   `professor` BIGINT NULL,
-  `nome` TEXT NULL COMMENT '					',
+  `nome` VARCHAR(100) NULL COMMENT '					',
   `ano` TINYINT NULL,
   `curso` VARCHAR(45) NULL,
   PRIMARY KEY (`idMateria`),

@@ -19,7 +19,7 @@ and open the template in the editor.
 					 <select name ="materia" >
 							<?php
 								foreach($mat as $materia){
-									echo "<option value='".$materia->idMateria."'>".$materia->nome."</option>";
+									echo "<option value='". (String)$materia->idMateria."'>".$materia->nome."</option>";
 								}									 
 							?>
 					 </select><br>
@@ -29,7 +29,7 @@ and open the template in the editor.
 					 <select name ="professor_substituto">
 							<?php
 								foreach($prof as $professor){
-									echo "<option value='".$professor->cadastro_identificador."'>".$professor->nome."</option>";
+									echo "<option value='".(String)$professor->cadastro_identificador."'>".$professor->nome."</option>";
 								}									 
 							?>
 					 </select><br>

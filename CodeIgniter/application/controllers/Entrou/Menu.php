@@ -8,7 +8,7 @@ class Menu extends CI_Controller {
         $this->load->database();
         $this->load->helper(array("url","html"));
         $this->load->library("session");
-        if(!$this->session->userdata("login")) {
+        if(!$this->session->userdata("idUsuario")) {
             redirect("login");
         }
     }

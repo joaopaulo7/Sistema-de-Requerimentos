@@ -30,7 +30,7 @@ class CriarFormularioSubstituicao extends CI_Controller {
 		  $this->form_validation->set_data($cadastro);
 	     $this->form_validation->set_rules("idFormularioSubs", "Id Formulario Subs", "is_unique[FormularioSubs.idFormularioSubs]", array('is_unique' => 'Erro de aleatoriedade  no %s.'));
 	     while(!$this->form_validation->run()) {
-	  	    $cadastro['idFormularioSubs'] = rand(0, 1000000);
+	  	     $cadastro['idFormularioSubs'] = rand(0, 1000000);
 			 $this->form_validation->set_data($cadastro);
 	 		 $this->form_validation->set_rules("idFormularioSubs", "Id Formulario Subs", "is_unique[FormularioSubs.idFormularioSubs]", array('is_unique' => 'Erro de aleatoriedade  no %s.'));
 		 }
@@ -60,10 +60,9 @@ class CriarFormularioSubstituicao extends CI_Controller {
         
         
         if( $this->form_validation->run()) {
-        		$prof = $cadatro['professor_substituto'];
-        		$cadatro['professor_substituto'] = null;
         		$this->SubstituicaoModel->setFormulario($cadastro);
-        		redirect('Entrou/controladorRequisitos/criadoSubs/'.$cadastro['idFormularioSubs'].'/'.$prof);
+        		echo $cadastro['professor_substituto'];
+        		redirect('Entrou/controladorRequisitos/criadoSubs/'.$cadastro['idFormularioSubs'].'/'.$cadastro['professor_substituto']);
         }
         else
         		$this->load->view('Entrou/erroFomularioSubstituicao');

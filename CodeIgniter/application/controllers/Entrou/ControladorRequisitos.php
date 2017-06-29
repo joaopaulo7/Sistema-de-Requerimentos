@@ -10,7 +10,7 @@ class ControladorRequisitos extends CI_Controller {
         $this->load->library("session");
         $this->load->model("ControladorModel");
         if(!$this->session->userdata("idUsuario")) {
-            redirect("login/loginEsp/".current_url());
+            redirect("login");
         }
     }
     
@@ -156,16 +156,16 @@ class ControladorRequisitos extends CI_Controller {
     }
         
     
-	 public static function criadoSubs($idform, $id){
+	 public function criadoSubs($idform, $id){
 	 		$confuser = $this->ControladorModel->getProfessor($id);
 	 		$this->mandarEmailConfProf($idform, $confuser->email);
-		   $this->load->view('Entrou/requisicaoEfetuada');
+		    $this->load->view('Entrou/requisicaoEfetuada');
     }
     
     public function criadoVis($id){
 	 		$confuser = $this->ControladorModel->getCoorVis($id);
 	 		$this->mandarEmailConfCoorVis($id, $confuser->email);
-		   $this->load->view('Entrou/requisicaoEfetuada');
+		    $this->load->view('Entrou/requisicaoEfetuada');
     }
     
     
