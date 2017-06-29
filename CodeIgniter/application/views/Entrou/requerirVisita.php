@@ -24,7 +24,7 @@ and open the template in the editor.
 					 </select><br>
                 
                 Local:
-					 <select name='idLocal'>
+					 <select name='local'>
 							<?php
 								foreach($local as $localizacao){
 									echo "<option value='".$localizacao->idLocal."'>".$localizacao->nome."</option>";

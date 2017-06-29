@@ -41,7 +41,7 @@ class ControladorRequisitos extends CI_Controller {
     	$this->email->from('sistemarequerimentoscefetvga@gmail.com', 'Sistema Requerimentos CEFET -Varginha');
 		$this->email->to($email);
 
-		$this->email->subject('Confirmação de Usuario');
+		$this->email->subject('Confirmação de Professor Para Substuição');
 		$this->email->message($html);
 
   		if (!$this->email->send()) {
@@ -77,7 +77,7 @@ class ControladorRequisitos extends CI_Controller {
     	$this->email->from('sistemarequerimentoscefetvga@gmail.com', 'Sistema Requerimentos CEFET -Varginha');
 		$this->email->to($email);
 
-		$this->email->subject('Confirmação de Usuario');
+		$this->email->subject('Confirmação de Coordenador para Substuição');
 		$this->email->message($html);
 
   		if (!$this->email->send()) {
@@ -112,7 +112,7 @@ class ControladorRequisitos extends CI_Controller {
     	$this->email->from('sistemarequerimentoscefetvga@gmail.com', 'Sistema Requerimentos CEFET -Varginha');
 		$this->email->to($email);
 
-		$this->email->subject('Confirmação de Usuario');
+		$this->email->subject('Confirmação de Coordenador para Visita Tecnica');
 		$this->email->message($html);
 
   		if (!$this->email->send()) {
@@ -147,7 +147,7 @@ class ControladorRequisitos extends CI_Controller {
     	$this->email->from('sistemarequerimentoscefetvga@gmail.com', 'Sistema Requerimentos CEFET -Varginha');
 		$this->email->to($email);
 
-		$this->email->subject('Confirmação de Usuario');
+		$this->email->subject('Confirmação de Diretor para Visita Tecnica');
 		$this->email->message($html);
 
   		if (!$this->email->send()) {
@@ -170,26 +170,53 @@ class ControladorRequisitos extends CI_Controller {
     
     
     public function confirmarProf($idform){
+			$this->load->view('Entrou/confirmaFormSubs');
+			if($this->input->post() != null)
+				$this->confirmarProf0($idform);
+	}
+	
+    public function confirmarProf0($idform){
 	 		$this->ControladorModel->setProfessor($idform, $this->session->userdata('login'));
 	 		$confuser = $this->ControladorModel->getCoorSubs($idform);
 	 		$this->mandarEmailConfCoorSubs($idform, $confuser->email);
 	 		$this->load->view('Entrou/requisicaoEfetuada');
     }
     
+    
     public function confirmarCoorSubs($idform){
+			$this->load->view('Entrou/confirmaFormSubs');
+			if($this->input->post() != null)
+			$this->confirmarCoorSubs0($idform);
+	}
+	
+    public function confirmarCoorSubs0($idform){
 	 		$this->ControladorModel->setCoorSubs($idform, $this->session->userdata('login'));
 			$this->load->view('Entrou/requisicaoEfetuada');
 	 		  
     }
     
+    
     public function confirmarCoorVis($idform){
+			$this->load->view('Entrou/confirmaFormSubs');
+			if($this->input->post() != null)
+			$this->confirmarCoorVis0($idform);
+	}
+	
+	public function confirmarCoorVis0($idform){
 	 		$this->ControladorModel->setCoorVis($idform, $this->session->userdata('login'));
 	 		$confuser = $this->ControladorModel->getDirVis($idform);
 	 		$this->mandarEmailConfDirVis($idform, $confuser->email);
 	 		$this->load->view('Entrou/requisicaoEfetuada');
     }
     
+  
     public function confirmarDirVis($idform){
+			$this->load->view('Entrou/confirmaFormSubs');
+			if($this->input->post() != null)
+			$this->confirmarDirVis0($idform);
+	}
+	
+	public function confirmarDirVis0($idform){
 	 		$this->ControladorModel->setDirVis($idform, $this->session->userdata('login'));
 	 		$this->load->view('Entrou/requisicaoEfetuada');
     }

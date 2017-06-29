@@ -23,10 +23,13 @@ and open the template in the editor.
                 
                 
                 <?php echo form_error('curso'); ?>
-                <label for="curso">
-                    Curso:
-                </label>
-                <input type="text" id="curso" name="curso"><br>
+                Departamento:
+				<select name = "curso">
+					 <option value="Geral">Geral</option>
+					 <option value="Informática">Informática</option>
+ 					 <option value="Edificações">Edificações</option>
+					 <option value="Mecatrônica">Mecatrônica</option>
+				</select><br>
                 
                 
                 <?php echo form_error('ano'); ?>

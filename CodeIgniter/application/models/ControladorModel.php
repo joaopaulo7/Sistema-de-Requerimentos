@@ -45,7 +45,6 @@ class ControladorModel extends CI_Model{
     	$this->db->where('cadastro_identificador', $formulario->proponente_da_viagem);
     	$propoente = $this->db->get('Pessoa');
     	$propoente = $propoente->result_object()[0];
-    	$this->db->where('departamento', $propoente->departamento);
     	$this->db->where('funcao', 'Diretor');
     	return $this->db->get('Pessoa')->result_object()[0];
     }
@@ -62,11 +61,11 @@ class ControladorModel extends CI_Model{
     
     public function setCoorVis($idform, $id){
     	$this->db->where('idFormulario', $idform);
-    	return $this->db->update('FormularioVisita', array('conf_coordenador'=>$id));
+    	return $this->db->update('FormularioVisita', array('coordenador'=>$id));
     }
     
     public function setDirVis($idform, $id){
     	$this->db->where('idFormulario', $idform);
-    	return $this->db->update('FormularioVisita', array('conf_diretor'=>$id));
+    	return $this->db->update('FormularioVisita', array('diretor'=>$id));
     }
 }
