@@ -9,4 +9,8 @@ class VisitaModel extends CI_Model {
     public function setFormulario($dados) {
         $resultado = $this->db->insert("FormularioVisita",$dados);
     }
+    
+    public function getLocal(){
+    	  return $this->db->get("Local")->result();
+    }
 }

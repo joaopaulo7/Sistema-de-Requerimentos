@@ -15,23 +15,22 @@ and open the template in the editor.
             <form method="POST" action="criarFormularioVisita/fazerFormulario">
             
             
-                <!-- O materia deve ser feio por meio de 
-                dropdowns tendo os nomes pré determinados-->
-            	<?php echo form_error('tipo_visita'); ?>
-                <label for="Tipo de Visita">
-                    Tipo de Visita:
-                </label>
-                <input type="text" id="tipo_visita" name="tipo_visita"><br>
+                Tipo de Visita:
+					 <select name='tipo_visita' >
+							<option value='Cultural'>Cultural</option>
+							<option value='Tecnica'>Tecnica</option>
+							<option value='Cientifica'>Cientifica</option>
+							<option value='Outro'>Outro</option>
+					 </select><br>
                 
-                
-                <!-- O Local deve ser feio por meio de 
-                dropdowns tendo os nomes pré determinados-->
-            	<?php echo form_error('idlocal'); ?>
-                <label for="Local ">
-                    Local:
-                </label>
-                <input type="text" id="idlocal" name="idlocal"><br>
-                
+                Local:
+					 <select name='idLocal'>
+							<?php
+								foreach($local as $localizacao){
+									echo "<option value='".$localizacao->idLocal."'>".$localizacao->nome."</option>";
+								}									 
+							?>
+					 </select><br>
                 
                 
                 <?php echo form_error('data'); ?>

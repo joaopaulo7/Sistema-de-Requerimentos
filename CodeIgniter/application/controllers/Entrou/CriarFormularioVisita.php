@@ -16,7 +16,8 @@ class CriarFormularioVisita extends CI_Controller {
     }
     
     public function index() {
-		$this->load->view('Entrou/requerirVisita');
+    	$data['local'] = $this->VisitaModel->getLocal();
+		$this->load->view('Entrou/requerirVisita', $data);
     }
     
     public function fazerFormulario(){
@@ -26,11 +27,11 @@ class CriarFormularioVisita extends CI_Controller {
 		  
 		 $cadastro['idFormulario'] = rand(0, 10000000);
 		 $this->form_validation->set_data($cadastro);
-	     $this->form_validation->set_rules("idFormulario", "Id Formulario", "is_unique[FormularioVisita.idFormulario]", array('is_unique' => 'Erro de aleatoriedade  no %s.'));
-	     while(!$this->form_validation->run()) {
-	  	    $cadastro['idFormulario'] = rand(0, 1000000);
-			$this->form_validation->set_data($cadastro);
-	 		$this->form_validation->set_rules("idFormulario", "Id Formulario", "is_unique[FormularioVisita.idFormulario]", array('is_unique' => 'Erro de aleatoriedade  no %s.'));
+	    $this->form_validation->set_rules("idFormulario", "Id Formulario", "is_unique[FormularioVisita.idFormulario]", array('is_unique' => 'Erro de aleatoriedade  no %s.'));
+	    while(!$this->form_validation->run()) {
+	  	    	$cadastro['idFormulario'] = rand(0, 1000000);
+	    $this->form_validation->set_data($cadastro);
+	 	 $this->form_validation->set_rules("idFormulario", "Id Formulario", "is_unique[FormularioVisita.idFormulario]", array('is_unique' => 'Erro de aleatoriedade  no %s.'));
 		 }
 		  
 		  

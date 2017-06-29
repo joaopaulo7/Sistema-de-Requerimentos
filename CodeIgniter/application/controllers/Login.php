@@ -3,7 +3,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CI_Controller {
-    public function __construct($link) {
+    public function __construct() {
         parent::__construct();
         $this->load->database();
         $this->load->helper(array("form","url"));
@@ -13,12 +13,11 @@ class Login extends CI_Controller {
     }
 
     public function index() {
-    	  $link='';
         $this->session->sess_destroy();
         $this->load->view('login');
     }
     
-    public function login($link = 'Entrou/menu') {
+    public function login() {
         $dados = $this->input->post();
         $this->form_validation->set_data($dados);
         $this->form_validation->set_rules("login", "Login", "required");
@@ -30,16 +29,13 @@ class Login extends CI_Controller {
             $resultado = $this->Loginmodel->verificaAcesso($dados);
             if(count($resultado) == 1) {
                 $this->session->set_userdata($resultado[0]);
-                redirect($link);
+                redirect("Entrou/menu");
             } else {
                 echo "Login ou senha incorretos!!!";
             }                
         }
     }
     
-    public function loginEsp($link) {
-			$this->load->view('login', $link);
-    }
     public function logout() {
         redirect("/login");
     }

@@ -19,7 +19,7 @@ and open the template in the editor.
 					 <select>
 							<?php
 								foreach($mat as $materia){
-									echo "<option value='".$materia->idMateria."'>".$materia->nome."</option>";
+									echo "<option value='".$materia->cadastro_identificador."'>".$materia->nome."</option>";
 								}									 
 							?>
 					 </select><br>

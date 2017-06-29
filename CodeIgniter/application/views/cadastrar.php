@@ -37,14 +37,13 @@ and open the template in the editor.
                 </label>
                 <input type="text" id="departamento" name="departamento"><br>
                 
-                
-                <!-- O departamento deve ser feio por meio de 
-                dropdowns tendo os nomes pré determinados-->
-                <?php echo form_error('funcao'); ?>
-                <label for="Funcao">
-                    Função:
-                </label>
-                <input type="text" id="funcao" name="funcao"><br>
+                Função:
+					 <select>
+					 	 <option value="Diretor">Diretor</option>
+						 <option value="Coordenador">Coordenador</option>
+ 						 <option value="Professor">Professor</option>
+					 	 <option value="Aluno">Aluno</option>
+					 </select><br>
                 
                 
                 <?php echo form_error('email'); ?>

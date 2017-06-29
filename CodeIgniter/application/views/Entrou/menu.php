@@ -13,12 +13,11 @@ and open the template in the editor.
     <body>
         <div>
         <?php
-        echo "esse será o menu";
+        echo anchor('Entrou/criarFormularioSubstituicao', 'Requerir Substituicao').br();
+        echo anchor('Entrou/criarFormularioVisita', 'Requerir Visita').br();
+        echo anchor('Entrou/criarMateria', 'Criar Materia').br();
+        echo anchor('Entrou/criarLocal', 'Criar Local').br().br();
         echo anchor('Entrou/menu/logout', 'Logout', 'title="Logout"');
-        echo anchor('Entrou/criarFormularioSubstituicao', 'Requerir Substituicao');
-        echo anchor('Entrou/criarFormularioVisita', 'Requerir Visita');
-        echo anchor('Entrou/criarMateria', 'Criar Materia');
-        echo anchor('Entrou/criarLocal', 'Criar Local');
         ?>
    </body>
 </html>

@@ -16,7 +16,8 @@ class CriarFormularioVisita extends CI_Controller {
     }
     
     public function index() {
-		$this->load->view('Entrou/requerirVisita');
+    	$data['local'] = $this->VisitaModel->getLocal();
+		$this->load->view('Entrou/requerirVisita', $data);
     }
     
     public function fazerFormulario(){
@@ -79,7 +80,7 @@ class CriarFormularioVisita extends CI_Controller {
         if( $this->form_validation->run()) {
         		 $cadastro['data_preenchimento'] = date("Y-m-d");
   	  	   	 $this->VisitaModel->setFormulario($cadastro);
-      	    redirect('Entrou/controladorRequisitos/criadoVis'.$cadastro['idFormulario']);
+      	    redirect('Entrou/controladorRequisitos/criadoVis/'.$cadastro['idFormulario']);
       	  }
       	else
         $this->load->view('Entrou/erroFomularioVisita');

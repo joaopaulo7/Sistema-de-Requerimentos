@@ -12,9 +12,9 @@ and open the template in the editor.
     </head>
     <body>
         <div>
-        <?php
-        echo '<form method="POST" action="login/login/"'.$link.'>';
-        ?>
+        
+        <form method="POST" action="login/login/">
+        
                 <label for="login">
                     Login:
                 </label>
