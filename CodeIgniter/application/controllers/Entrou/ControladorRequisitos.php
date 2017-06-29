@@ -159,66 +159,53 @@ class ControladorRequisitos extends CI_Controller {
 	 public function criadoSubs($idform, $id){
 	 		$confuser = $this->ControladorModel->getProfessor($id);
 	 		$this->mandarEmailConfProf($idform, $confuser->email);
-		    $this->load->view('Entrou/confirmacaoEfetuada');
+		    $this->load->view('Entrou/requisicaoEfetuada');
     }
     
     public function criadoVis($id){
 	 		$confuser = $this->ControladorModel->getCoorVis($id);
 	 		$this->mandarEmailConfCoorVis($id, $confuser->email);
-		    $this->load->view('Entrou/confirmacaoEfetuada');
+		    $this->load->view('Entrou/requisicaoEfetuada');
     }
     
     
     public function confirmarProf($idform){
 			$this->load->view('Entrou/confirmaFormSubs');
-			if($this->input->post() != null)
-				$this->confirmarProf0($idform);
-	}
-	
-    public function confirmarProf0($idform){
-	 		$this->ControladorModel->setProfessor($idform, $this->session->userdata('login'));
-	 		$confuser = $this->ControladorModel->getCoorSubs($idform);
-	 		$this->mandarEmailConfCoorSubs($idform, $confuser->email);
-	 		$this->load->view('Entrou/confirmacaoEfetuada');
+			if($this->input->post() != null){
+				$this->ControladorModel->setProfessor($idform, $this->session->userdata('login'));
+				$confuser = $this->ControladorModel->getCoorSubs($idform);
+				$this->mandarEmailConfCoorSubs($idform, $confuser->email);
+				$this->load->view('Entrou/confirmacaoEfetuada');
+			}
     }
     
     
     public function confirmarCoorSubs($idform){
 			$this->load->view('Entrou/confirmaFormSubs');
-			if($this->input->post() != null)
-			$this->confirmarCoorSubs0($idform);
-	}
-	
-    public function confirmarCoorSubs0($idform){
-	 		$this->ControladorModel->setCoorSubs($idform, $this->session->userdata('login'));
-			$this->load->view('Entrou/confirmacaoEfetuada');
+			if($this->input->post() != null){
+				$this->ControladorModel->setCoorSubs($idform, $this->session->userdata('login'));
+				$this->load->view('Entrou/confirmacaoEfetuada');
+			}
 	 		  
     }
     
     
     public function confirmarCoorVis($idform){
 			$this->load->view('Entrou/confirmaFormSubs');
-			if($this->input->post() != null)
-			$this->confirmarCoorVis0($idform);
-	}
-	
-	public function confirmarCoorVis0($idform){
-	 		$this->ControladorModel->setCoorVis($idform, $this->session->userdata('login'));
-	 		$confuser = $this->ControladorModel->getDirVis($idform);
-	 		$this->mandarEmailConfDirVis($idform, $confuser->email);
-	 		$this->load->view('Entrou/confirmacaoEfetuada');
+			if($this->input->post() != null){
+				$this->ControladorModel->setCoorVis($idform, $this->session->userdata('login'));
+				$confuser = $this->ControladorModel->getDirVis($idform);
+				$this->mandarEmailConfDirVis($idform, $confuser->email);
+				$this->load->view('Entrou/confirmacaoEfetuada');
+			}
     }
     
   
     public function confirmarDirVis($idform){
 			$this->load->view('Entrou/confirmaFormSubs');
-			if($this->input->post() != null)
-			$this->confirmarDirVis0($idform);
+			if($this->input->post() != null){
+				$this->ControladorModel->setDirVis($idform, $this->session->userdata('login'));
+				$this->load->view('Entrou/confirmacaoEfetuada');
+			}
 	}
-	
-	public function confirmarDirVis0($idform){
-	 		$this->ControladorModel->setDirVis($idform, $this->session->userdata('login'));
-	 		$this->load->view('Entrou/confirmacaoEfetuada');
-    }
- }
- 
+}

@@ -12,11 +12,9 @@ and open the template in the editor.
     </head>
     <body>
         <div>
-            <form method="POST" action="criarLocal/fazerLocal">
+            <form method="POST" action="fazerLocal">
                 
                 
-                <!-- O professor deve ser feio por meio de 
-                dropdowns tendo os nomes pré determinados-->
                 <?php echo form_error('nome'); ?>
                 <label for="nome">
                     Nome:
@@ -57,8 +55,5 @@ and open the template in the editor.
                 </button>
             </form>
         </div>
-        <br>
-        <br>
-        <?php echo anchor('Entrou/menu', 'Voltar ao menu', 'Voltar ao menu') ?>
     </body>
 </html>

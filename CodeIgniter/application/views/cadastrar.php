@@ -76,5 +76,8 @@ and open the template in the editor.
                 </button>
             </form>
         </div>
+        <br>
+        <br>
+        <?php echo anchor('login', 'Login', 'Login') ?>
     </body>
 </html>

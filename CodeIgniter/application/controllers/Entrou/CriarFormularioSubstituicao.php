@@ -60,9 +60,11 @@ class CriarFormularioSubstituicao extends CI_Controller {
         
         
         if( $this->form_validation->run()) {
+				$prof = $cadastro['professor_substituto'];
+				$cadastro['professor_substituto'] = null;
         		$this->SubstituicaoModel->setFormulario($cadastro);
-        		echo $cadastro['professor_substituto'];
-        		redirect('Entrou/controladorRequisitos/criadoSubs/'.$cadastro['idFormularioSubs'].'/'.$cadastro['professor_substituto']);
+        		
+        		redirect('Entrou/controladorRequisitos/criadoSubs/'.$cadastro['idFormularioSubs'].'/'.$prof);
         }
         else
         		$this->load->view('Entrou/erroFomularioSubstituicao');

@@ -61,5 +61,8 @@ and open the template in the editor.
                 </button>
             </form>
         </div>
+        <br>
+        <br>
+        <?php echo anchor('Entrou/menu', 'Voltar ao menu', 'Voltar ao menu') ?>
     </body>
 </html>

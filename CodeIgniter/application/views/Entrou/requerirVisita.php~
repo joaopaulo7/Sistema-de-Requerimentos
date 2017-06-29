@@ -16,7 +16,7 @@ and open the template in the editor.
             
             
                 Tipo de Visita:
-					 <select id='tipo_visita' >
+					 <select name='tipo_visita' >
 							<option value='Cultural'>Cultural</option>
 							<option value='Tecnica'>Tecnica</option>
 							<option value='Cientifica'>Cientifica</option>
@@ -24,7 +24,7 @@ and open the template in the editor.
 					 </select><br>
                 
                 Local:
-					 <select id='idLocal'>
+					 <select name='local'>
 							<?php
 								foreach($local as $localizacao){
 									echo "<option value='".$localizacao->idLocal."'>".$localizacao->nome."</option>";

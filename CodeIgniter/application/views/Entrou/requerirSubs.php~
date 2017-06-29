@@ -14,22 +14,22 @@ and open the template in the editor.
         <div>
             <form method="POST" action="criarFormularioSubstituicao/fazerFormulario">
             
-            
+				<?php echo form_error('materia'); ?>
                 Materia:
-					 <select>
+					 <select name ="materia" >
 							<?php
 								foreach($mat as $materia){
-									echo "<option value='".$materia->cadastro_identificador."'>".$materia->nome."</option>";
+									echo "<option value='". (String)$materia->idMateria."'>".$materia->nome."</option>";
 								}									 
 							?>
 					 </select><br>
                 
-                
+                <?php echo form_error('professor_substituto'); ?>
                 Substituto:
-					 <select>
+					 <select name ="professor_substituto">
 							<?php
 								foreach($prof as $professor){
-									echo "<option value='".$professor->cadastro_identificador."'>".$professor->nome."</option>";
+									echo "<option value='".(String)$professor->cadastro_identificador."'>".$professor->nome."</option>";
 								}									 
 							?>
 					 </select><br>
