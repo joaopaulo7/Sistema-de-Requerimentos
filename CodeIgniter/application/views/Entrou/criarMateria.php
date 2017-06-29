@@ -15,8 +15,6 @@ and open the template in the editor.
             <form method="POST" action="criarMateria/fazerMateria">
                 
                 
-                <!-- O professor deve ser feio por meio de 
-                dropdowns tendo os nomes pré determinados-->
                 <?php echo form_error('nome'); ?>
                 <label for="nome">
                     Nome:
@@ -25,10 +23,13 @@ and open the template in the editor.
                 
                 
                 <?php echo form_error('curso'); ?>
-                <label for="curso">
-                    Curso:
-                </label>
-                <input type="text" id="curso" name="curso"><br>
+                Departamento:
+				<select name = "curso">
+					 <option value="Geral">Geral</option>
+					 <option value="Informática">Informática</option>
+ 					 <option value="Edificações">Edificações</option>
+					 <option value="Mecatrônica">Mecatrônica</option>
+				</select><br>
                 
                 
                 <?php echo form_error('ano'); ?>

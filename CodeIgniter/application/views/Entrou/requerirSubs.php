@@ -14,9 +14,9 @@ and open the template in the editor.
         <div>
             <form method="POST" action="criarFormularioSubstituicao/fazerFormulario">
             
-            
+				<?php echo form_error('materia'); ?>
                 Materia:
-					 <select>
+					 <select name ="materia" >
 							<?php
 								foreach($mat as $materia){
 									echo "<option value='".$materia->idMateria."'>".$materia->nome."</option>";
@@ -24,9 +24,9 @@ and open the template in the editor.
 							?>
 					 </select><br>
                 
-                
+                <?php echo form_error('professor_substituto'); ?>
                 Substituto:
-					 <select>
+					 <select name ="professor_substituto">
 							<?php
 								foreach($prof as $professor){
 									echo "<option value='".$professor->cadastro_identificador."'>".$professor->nome."</option>";

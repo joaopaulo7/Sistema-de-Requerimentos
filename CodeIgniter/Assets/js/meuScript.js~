@@ -1,0 +1,21 @@
+$(document).ready(function(e){
+  $("#menu-top a").click(function(e){
+    e.preventDefault();
+    var href = $(this).attr('href');
+    $("#conteudo").load(href + " #conteudo", function(){
+        $("#erroNome").hide();
+        $("#erroEmail").hide();
+        $("#erroSenha").hide();
+        function Validar(){
+             var nome = $("#textNome").val();
+             if(nome.length < 10){
+             $("#erroNome").show();
+             return false;
+         }
+       };
+       document.querySelector('#formExemplo').onsubmit = Validar;
+    });
+
+
+  });
+});

@@ -15,22 +15,25 @@ and open the template in the editor.
             <form method="POST" action="fazerFormulario">
             
             
-                <!-- O materia deve ser feio por meio de 
-                dropdowns tendo os nomes pré determinados-->
-            	<?php echo form_error('materia'); ?>
-                <label for="Materia">
-                    Materia a substituir:
-                </label>
-                <input type="text" id="materia" name="materia"><br>
+				<?php echo form_error('materia'); ?>
+                Materia:
+					 <select name ="materia" >
+							<?php
+								foreach($mat as $materia){
+									echo "<option value='".$materia->idMateria."'>".$materia->nome."</option>";
+								}									 
+							?>
+					 </select><br>
                 
-                
-                <!-- O professor deve ser feio por meio de 
-                dropdowns tendo os nomes pré determinados-->
-                <?php echo form_error('professor'); ?>
-                <label for="Professor Substituto">
-                    Professor Substituto:
-                </label>
-                <input type="text" id="professor_substituto" name="professor_substituto"><br>
+                <?php echo form_error('professor_substituto'); ?>
+                Substituto:
+					 <select name ="professor_substituto">
+							<?php
+								foreach($prof as $professor){
+									echo "<option value='".$professor->cadastro_identificador."'>".$professor->nome."</option>";
+								}									 
+							?>
+					 </select><br>
                 
                 
                 <?php echo form_error('motivo'); ?>

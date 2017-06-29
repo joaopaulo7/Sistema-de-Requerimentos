@@ -13,7 +13,7 @@ and open the template in the editor.
     <body>
         <div>
         
-        <form method="POST" action="login/login/">
+        <form method="POST" action="login/login">
         
                 <label for="login">
                     Login:

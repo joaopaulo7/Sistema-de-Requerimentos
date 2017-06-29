@@ -58,7 +58,7 @@ class Cadastrar extends CI_Controller {
     public function fazerCadastro(){
     	  $cadastro = $this->input->post();
 		  
-		  
+		  //$cadastro['funcao'] =$this->input->post("infuncao");
 		  
 		  $cadastro['idUsuario'] = rand(0, 10000000);
 		  $this->form_validation->set_data($cadastro);
@@ -90,10 +90,10 @@ class Cadastrar extends CI_Controller {
                 'required'      => 'Você não escreveu o %s.'));
         
         
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email'/*|is_unique[Pessoa.email]'*/, array(
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[Pessoa.email]', array(
                 'required'      => 'Você não escreveu o %s.',
-                'valid_email'   => 'Esse %s não é válido.'/*,
-                'is_unique'     => 'Esse %s já existe.'*/));
+                'valid_email'   => 'Esse %s não é válido.',
+                'is_unique'     => 'Esse %s já existe.'));
         
         
      	  $this->form_validation->set_rules("senha", "Senha", "required", array(
@@ -104,7 +104,7 @@ class Cadastrar extends CI_Controller {
         	    'required'      => 'Você não escreveu o %s.',
         		'matches'       => 'As senhas não são iguais'));
         
-        
+
         if( $this->form_validation->run()) {
       	    $cadastro["senha"] = sha1($cadastro["senha"]);
       	    $this->mandarEmailConf( $cadastro['idUsuario'], $cadastro['email']);
@@ -112,7 +112,7 @@ class Cadastrar extends CI_Controller {
       	    $this->load->view('cadastroEfetuado');
       	  }
       	else
-             $this->load->view('erroCadastro');
+             $this->load->view('erroCadastro');        
 	 }
 	 
 	 public function confirmaEmail($usuario){

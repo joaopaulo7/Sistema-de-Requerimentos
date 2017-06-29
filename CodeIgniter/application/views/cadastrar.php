@@ -32,18 +32,22 @@ and open the template in the editor.
                 <!-- O departamento deve ser feio por meio de 
                 dropdowns tendo os nomes pré determinados-->
                 <?php echo form_error('departamento'); ?>
-                <label for="Departamento">
-                    Departamento:
-                </label>
-                <input type="text" id="departamento" name="departamento"><br>
-                
+                Departamento:
+				<select name = "departamento">
+					 <option value="Geral">Geral</option>
+					 <option value="Informática">Informática</option>
+ 					 <option value="Edificações">Edificações</option>
+					 <option value="Mecatrônica">Mecatrônica</option>
+				</select><br>
+				
+                <?php echo form_error('funcao'); ?>
                 Função:
-					 <select>
-					 	 <option value="Diretor">Diretor</option>
-						 <option value="Coordenador">Coordenador</option>
- 						 <option value="Professor">Professor</option>
-					 	 <option value="Aluno">Aluno</option>
-					 </select><br>
+				<select name = "funcao">
+					 <option value="Diretor">Diretor</option>
+					 <option value="Coordenador">Coordenador</option>
+ 					 <option value="Professor">Professor</option>
+					 <option value="Aluno">Aluno</option>
+				</select><br>
                 
                 
                 <?php echo form_error('email'); ?>

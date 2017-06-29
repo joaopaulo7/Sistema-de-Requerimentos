@@ -14,18 +14,7 @@ and open the template in the editor.
         <div>
             <form method="POST" action="fazerMateria">
             
-            
-                <!-- O materia deve ser feio por meio de 
-                dropdowns tendo os nomes pré determinados-->
-            	<?php echo form_error('professor'); ?>
-                <label for="Professor">
-                    Materia:
-                </label>
-                <input type="text" id="professor" name="professor"><br>
                 
-                
-                <!-- O professor deve ser feio por meio de 
-                dropdowns tendo os nomes pré determinados-->
                 <?php echo form_error('nome'); ?>
                 <label for="nome">
                     Nome:
