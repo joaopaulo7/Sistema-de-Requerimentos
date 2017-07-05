@@ -1,0 +1,27 @@
+<?php
+
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Listagem extends CI_Controller {
+    public function __construct() {
+        parent::__construct();
+        $this->load->database();
+        $this->load->helper(array("url","html"));
+        $this->load->library("session");
+        $this->load->model("ListagemModel");
+        if(!$this->session->userdata("idUsuario")) {
+            redirect("login");
+        }
+    }
+    
+    public function index() {
+    	$list['listavis'] = $this->ListagemModel->getListvis();
+    	$list['listasubs'] = $this->ListagemModel->getListsubs();
+		$this->load->view('Entrou/listagem', $list);
+    }
+    
+    public function logout(){
+		redirect('login');
+	}
+	
+}
