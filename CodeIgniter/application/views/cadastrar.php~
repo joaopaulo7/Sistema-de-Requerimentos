@@ -32,8 +32,8 @@ and open the template in the editor.
                 <!-- O departamento deve ser feio por meio de 
                 dropdowns tendo os nomes pré determinados-->
                 <?php echo form_error('departamento'); ?>
-                Departamento:
-				<select name = "departamento">
+                Area:
+				<select name = "area">
 					 <option value="Geral">Geral</option>
 					 <option value="Informática">Informática</option>
  					 <option value="Edificações">Edificações</option>
@@ -76,5 +76,8 @@ and open the template in the editor.
                 </button>
             </form>
         </div>
+        <br>
+        <br>
+        <?php echo anchor('login', 'Login', 'Login') ?>
     </body>
 </html>

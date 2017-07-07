@@ -12,7 +12,7 @@ class Loginmodel extends CI_Model {
         $resultado = $this->db->get('Usuario'); 
         
         $this->db->where('cadastro_identificador', $dados['login']);
-        $this->db->where('confirmacao', 1);
+        $this->db->where('confirmacao_email', 1);
         $this->db->from('Pessoa');
         if($this->db->count_all_results() == 1)
 			return $resultado->result_array();

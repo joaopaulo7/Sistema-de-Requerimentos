@@ -9,45 +9,50 @@ class ControladorModel extends CI_Model{
     
     public function getProfessor($id){
     	$this->db->where('cadastro_identificador', $id);
-    	$pessoa = $this->db->get('Pessoa');
-    	$pessoa = $pessoa->result_object()[0];
-    	return $pessoa;
+    	return $this->db->get('Pessoa')->result_object()[0];
     }
     
-    public function getCoorSubs($idform){
+    public function setProfessorReq($id, $idform){
     	$this->db->where('idFormularioSubs', $idform);
-    	$formulario = $this->db->get('FormularioSubs');
-    	$formulario = $formulario->result_object()[0];
-    	$this->db->where('idMateria', $formulario->materia);
-    	$materia = $this->db->get('Materia');
-    	$materia = $materia->result_object()[0];
-    	$this->db->where('departamento', $materia->curso);
-    	$this->db->where('funcao', 'Coordenador');
-    	return $this->db->get('Pessoa')->result_object()[0];
+    	$this->db->update('FormularioSubs', array('professor_req'=>$id));
+    	return $this->db->get_where('Pessoa',"cadastro_identificador = ".$id)->result_object()[0];
     }
     
-    public function getCoorVis($idform){
-    	$this->db->where('idFormulario', $idform);
-    	$formulario = $this->db->get('FormularioVisita');
-    	$formulario = $formulario->result_object()[0];
-    	$this->db->where('cadastro_identificador', $formulario->proponente_da_viagem);
-    	$propoente = $this->db->get('Pessoa');
-    	$propoente = $propoente->result_object()[0];
-    	$this->db->where('departamento', $propoente->departamento);
-    	$this->db->where('funcao', 'Coordenador');
-    	return $this->db->get('Pessoa')->result_object()[0];
+    public function setCoorReqSubs($id, $idform){
+    	
+    	$this->db->where('cadastro_identificador', $id);
+    	$pessoa = $this->db->get('Pessoa')->result_object()[0];
+    	
+    	$this->db->where('area', $pessoa->area);
+    	$coor = $this->db->get('Coordenador')->result_object()[0];
+    	
+    	$this->db->where('idFormularioSubs', $idform);
+    	$this->db->update('FormularioSubs', array('coordenador_req'=>$coor->idcoordenador));
+    	return $this->getProfessor($coor->idcoordenador);
     }
     
-    public function getDirVis($idform){
+    public function setCoorReqVis($id, $idform){
+    	$this->db->where('cadastro_identificador', $id);
+    	
+    	$pessoa = $this->db->get('Pessoa')->result_object()[0];
+    	
+    	$this->db->where('area', $pessoa->area);
+    	$coor = $this->db->get('Coordenador')->result_object()[0];
+    	
     	$this->db->where('idFormulario', $idform);
-    	$formulario = $this->db->get('FormularioVisita');
-    	$formulario = $formulario->result_object()[0];
-    	$this->db->where('cadastro_identificador', $formulario->proponente_da_viagem);
-    	$propoente = $this->db->get('Pessoa');
-    	$propoente = $propoente->result_object()[0];
-    	$this->db->where('funcao', 'Diretor');
-    	return $this->db->get('Pessoa')->result_object()[0];
+    	$this->db->update('FormularioVisita', array('coordenador_req'=>$coor->idcoordenador));
+    	return $this->getProfessor($coor->idcoordenador);
     }
+    
+    public function setDirReq($idform){
+    	
+    	$dir = $this->db->get('Diretor')->result_object()[0];
+    	
+    	$this->db->where('idFormulario', $idform);
+    	$this->db->update('FormularioVisita', array('coordenador_req'=>$dir->iddiretor));
+    	return $dir;
+    }
+    
     
     public function setProfessor($idform, $id){
     	$this->db->where('idFormularioSubs', $idform);

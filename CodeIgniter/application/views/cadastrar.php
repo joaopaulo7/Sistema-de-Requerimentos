@@ -32,8 +32,8 @@ and open the template in the editor.
                 <!-- O departamento deve ser feio por meio de 
                 dropdowns tendo os nomes pré determinados-->
                 <?php echo form_error('departamento'); ?>
-                Departamento:
-				<select name = "departamento">
+                Area:
+				<select name = "area">
 					 <option value="Geral">Geral</option>
 					 <option value="Informática">Informática</option>
  					 <option value="Edificações">Edificações</option>
@@ -43,10 +43,10 @@ and open the template in the editor.
                 <?php echo form_error('funcao'); ?>
                 Função:
 				<select name = "funcao">
-					 <option value="Diretor">Diretor</option>
-					 <option value="Coordenador">Coordenador</option>
- 					 <option value="Professor">Professor</option>
-					 <option value="Aluno">Aluno</option>
+					 <option value="diretor">Diretor</option>
+					 <option value="coordenador">Coordenador</option>
+ 					 <option value="professor">Professor</option>
+					 <option value="aluno">Aluno</option>
 				</select><br>
                 
                 

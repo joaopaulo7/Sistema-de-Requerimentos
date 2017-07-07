@@ -10,10 +10,10 @@ class CadastrarModel extends CI_Model {
     	  $this->db->insert("Pessoa",array(
     	  'cadastro_identificador' => $dados['cadastro_identificador'],
     	  'nome'                    => $dados['nome'], 
-    	  'departamento'            => $dados['departamento'],
+    	  'area'            => $dados['area'],
     	  'funcao'                  => $dados['funcao'],
     	  'email'                   => $dados['email'],
-    	  'confirmacao'             => false));
+    	  'confirmacao_email'             => false));
     	  
     	  
     	  $this->db->insert("Usuario",array(
@@ -26,6 +26,12 @@ class CadastrarModel extends CI_Model {
 		  $cadastro = $this->db->get_where('Usuario', array('idUsuario' => $usuario));
 		  $cadastro = $cadastro->result_object()[0];
 		  $this->db->where('cadastro_identificador', $cadastro->login);
-		  $this->db->update("Pessoa", array('confirmacao'=> 1));
+		  $this->db->update("Pessoa", array('confirmacao_email'=> 1));
 	}
+	public function setDiretor($usuario) {
+		$this->db->insert("Diretor",array( 'iddiretor'=> $usuario));
+	}
+   public function setCoordenador($usuario, $area) {
+   	$this->db->insert("Coordenador",array( 'idcoordenador'=> $usuario, 'area'=> $area));
+   }
 }

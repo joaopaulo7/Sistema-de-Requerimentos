@@ -18,6 +18,8 @@ class ListagemModel extends CI_Model {
     }
     public function getProf($prof) {
         $res = $this->db->get_where("Pessoa",' cadastro_identificador ='.$prof)-> result();
+        if($res == null)
+        		return "Não confirmado ainda";
         return $res[0]->nome;
     }
     public function getProf0($mat) {

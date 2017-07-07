@@ -20,7 +20,7 @@ class ListagemModel extends CI_Model {
         $res = $this->db->get_where("Pessoa",' cadastro_identificador ='.$prof)-> result();
         return $res[0]->nome;
     }
-    public function getProf0($prof) {
+    public function getProf0($mat) {
         $res = $this->db->get_where("Materia",' idMateria ='.$mat)-> result();
         return $this->getProf($res[0]->professor);
     }

@@ -6,12 +6,32 @@ class CadastrarModel extends CI_Model {
     public function __construct() {
         parent::__construct();
     }
-    public function setCadastro($dadosp, $dadosf) {
-    	  $this->db->insert("Pessoa",$dadosp);
-    	  $dadosf['login'] = $dadosp['cadastro_identificador'];
+    public function setCadastro($dados) {
+    	  $this->db->insert("Pessoa",array(
+    	  'cadastro_identificador' => $dados['cadastro_identificador'],
+    	  'nome'                    => $dados['nome'], 
+    	  'area'            => $dados['area'],
+    	  'funcao'                  => $dados['funcao'],
+    	  'email'                   => $dados['email'],
+    	  'confirmacao_email'             => false));
+    	  
+    	  
     	  $this->db->insert("Usuario",array(
-    	  'login'     => $dadosf['login'], 
-    	  'senha'     => $dadosf['senha']));
+    	  'idUsuario' => $dados['idUsuario'],
+    	  'login'     => $dados['cadastro_identificador'], 
+    	  'senha'     => $dados['senha']));
 
     }
+    public function confirma($usuario) {
+		  $cadastro = $this->db->get_where('Usuario', array('idUsuario' => $usuario));
+		  $cadastro = $cadastro->result_object()[0];
+		  $this->db->where('cadastro_identificador', $cadastro->login);
+		  $this->db->update("Pessoa", array('confirmacao_email'=> 1));
+	}
+	public function setDiretor($usuario) {
+		$this->db->insert("Diretor",array( 'iddiretor'=> $usuario));
+	}
+   public function setCoordenador($usuario, $area) {
+   	$this->db->insert("Coodenador",array( 'idcoordenador'=> $usuario, 'area'=> $area));
+   }
 }

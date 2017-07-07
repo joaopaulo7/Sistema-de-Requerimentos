@@ -16,6 +16,7 @@ and open the template in the editor.
         echo anchor('Entrou/criarFormularioSubstituicao', 'Requerir Substituicao').br();
         echo anchor('Entrou/criarFormularioVisita', 'Requerir Visita').br();
         echo anchor('Entrou/criarMateria', 'Criar Materia').br();
+        echo anchor('Entrou/listagem', 'Listar Formulários').br();
         echo anchor('Entrou/criarLocal', 'Criar Local').br().br();
         echo anchor('Entrou/menu/logout', 'Logout', 'title="Logout"');
         ?>

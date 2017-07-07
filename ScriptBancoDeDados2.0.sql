@@ -1,8 +1,17 @@
+-- MySQL Workbench Forward Engineering
+
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-CREATE SCHEMA IF NOT EXISTS `blog` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+-- -----------------------------------------------------
+-- Schema blog
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema blog
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `blog` DEFAULT CHARACTER SET utf8 ;
 USE `blog` ;
 
 -- -----------------------------------------------------
@@ -11,10 +20,11 @@ USE `blog` ;
 CREATE TABLE IF NOT EXISTS `blog`.`Pessoa` (
   `cadastro_identificador` BIGINT NOT NULL,
   `nome` VARCHAR(45) NULL,
-  `departamento` VARCHAR(20) NULL,
+  `area` VARCHAR(20) NULL,
   `funcao` VARCHAR(20) NULL,
   `email` VARCHAR(129) NULL,
-  `confirmacao` TINYINT(1) NULL,
+  `confirmacao_email` TINYINT(1) NULL,
+  `confirmacao_entrada` TINYINT(1) NULL,
   PRIMARY KEY (`cadastro_identificador`))
 ENGINE = InnoDB
 INSERT_METHOD = NO
@@ -43,7 +53,9 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `blog`.`FormularioVisita` (
   `idFormulario` INT NOT NULL,
   `proponente_da_viagem` BIGINT NULL,
+  `corrdenador_req` BIGINT NULL,
   `coordenador` BIGINT NULL,
+  `diretor_req` BIGINT NULL,
   `diretor` BIGINT NULL,
   `local` INT NULL,
   `tipo_visita` VARCHAR(20) NULL,
@@ -64,6 +76,8 @@ CREATE TABLE IF NOT EXISTS `blog`.`FormularioVisita` (
   INDEX `fk_FormularioVisita_propoente_idx` (`proponente_da_viagem` ASC),
   INDEX `fk_FormularioVisita_coordenador_idx` (`coordenador` ASC),
   INDEX `fk_FormularioVisita_diretor_idx` (`diretor` ASC),
+  INDEX `fk_FormularioVisita_1_idx` (`corrdenador_req` ASC),
+  INDEX `fk_FormularioVisita_2_idx` (`diretor_req` ASC),
   CONSTRAINT `fk_FormularioVisita_local`
     FOREIGN KEY (`local`)
     REFERENCES `blog`.`Local` (`idLocal`)
@@ -81,6 +95,16 @@ CREATE TABLE IF NOT EXISTS `blog`.`FormularioVisita` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_FormularioVisita_diretor`
     FOREIGN KEY (`diretor`)
+    REFERENCES `blog`.`Pessoa` (`cadastro_identificador`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_FormularioVisita_coordenador_req`
+    FOREIGN KEY (`corrdenador_req`)
+    REFERENCES `blog`.`Pessoa` (`cadastro_identificador`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_FormularioVisita_diretor_req`
+    FOREIGN KEY (`diretor_req`)
     REFERENCES `blog`.`Pessoa` (`cadastro_identificador`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -128,7 +152,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `blog`.`FormularioSubs` (
   `idFormularioSubs` INT NOT NULL,
+  `professor_substituto_req` BIGINT NULL,
   `professor_substituto` BIGINT NULL,
+  `coordenador_req` BIGINT NULL,
   `coordenador` BIGINT NULL,
   `materia` INT NULL,
   `motivo` TEXT NULL,
@@ -138,21 +164,52 @@ CREATE TABLE IF NOT EXISTS `blog`.`FormularioSubs` (
   INDEX `fk_FormularioSubs_1_idx` (`professor_substituto` ASC),
   INDEX `fk_FormularioSubs_2_idx` (`materia` ASC),
   INDEX `fk_FormularioSubs_3_idx` (`coordenador` ASC),
-  CONSTRAINT `fk_FormularioSubs_1`
+  INDEX `fk_FormularioSubs_4_idx` (`professor_substituto_req` ASC),
+  INDEX `fk_FormularioSubs_5_idx` (`coordenador_req` ASC),
+  CONSTRAINT `fk_FormularioSubs_professor_substituto`
     FOREIGN KEY (`professor_substituto`)
     REFERENCES `blog`.`Pessoa` (`cadastro_identificador`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_FormularioSubs_2`
+  CONSTRAINT `fk_FormularioSubs_materia`
     FOREIGN KEY (`materia`)
     REFERENCES `blog`.`Materia` (`idMateria`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_FormularioSubs_3`
+  CONSTRAINT `fk_FormularioSubs_coordenador`
     FOREIGN KEY (`coordenador`)
     REFERENCES `blog`.`Pessoa` (`cadastro_identificador`)
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_FormularioSubs_professor_substituto_req`
+    FOREIGN KEY (`professor_substituto_req`)
+    REFERENCES `blog`.`Pessoa` (`cadastro_identificador`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_FormularioSubs_coordenador_req`
+    FOREIGN KEY (`coordenador_req`)
+    REFERENCES `blog`.`Pessoa` (`cadastro_identificador`)
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `blog`.`Diretor`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `blog`.`Diretor` (
+  `iddiretor` BIGINT NOT NULL,
+  PRIMARY KEY (`iddiretor`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `blog`.`Coordenador`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `blog`.`Coordenador` (
+  `idCoordenador` BIGINT NOT NULL,
+  `area` VARCHAR(20) NULL,
+  PRIMARY KEY (`idCoordenador`))
 ENGINE = InnoDB;
 
 
