@@ -39,4 +39,8 @@ class Confirmacoes extends CI_Controller {
     			redirect("Entrou/controladorRequisitos/confirmarCoorSubs/".$idform);
     	}
     }
+    public function pdfSubs($id) {
+    	$formulario['form'] = $this->ConfirmacoesModel->getFormSubs($id);
+    	$this->load->view('Entrou/pdfSubs', $formulario );
+    }
 }

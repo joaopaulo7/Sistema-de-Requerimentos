@@ -49,8 +49,8 @@ and open the template in the editor.
        	 		foreach($listasubs as $form){
      	   			echo '<tr>
     								<td>'.$this->ConfirmacoesModel->getProf($form->materia).'</td>
-									<td><a href="confirmacoes/confSubs/'.$form->idFormularioSubs.'" > phpf </a></td>
-									<td><a href="#" > Confirmar </a></td>
+									<td><a href="confirmacoes/confSubs/'.$form->idFormularioSubs.'" > Confirmar </a></td>
+									<td><a href="confirmacoes/pdfSubs/'.$form->idFormularioSubs.'"</a>PDF</td>
   								</tr>';
        	 		}
        	 }

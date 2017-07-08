@@ -14,6 +14,6 @@ class SubstituicaoModel extends CI_Model {
     }
     
     public function getMateria(){
-    	  return $this->db->get("Materia")->result();
+    	  return $this->db->get_where("Materia", "professor =".$this->session->userdata('login'))->result();
     }
 }

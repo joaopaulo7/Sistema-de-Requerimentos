@@ -33,10 +33,14 @@ class Confirmacoes extends CI_Controller {
 	 public function confSubs($idform){
 	 	$funcao = $this->ConfirmacoesModel->getfuncao();
     	if($this->ConfirmacoesModel->isProf($idform))
-    		redirect("Entrou/controladorRequisitos/confirmarProfessor/".$idform);
+    		redirect("Entrou/controladorRequisitos/confirmarProf/".$idform);
     	else {
     		if($funcao == "coordenador")
     			redirect("Entrou/controladorRequisitos/confirmarCoorSubs/".$idform);
     	}
+    }
+    public function pdfSubs($id) {
+    	$formulario['form'] = $this->ConfirmacoesModel->getFormSubs($id);
+    	$this->load->view('Entrou/pdfSubs', $form );
     }
 }
