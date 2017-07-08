@@ -22,8 +22,21 @@ class Confirmacoes extends CI_Controller {
 		$this->load->view('Entrou/confirmacoes', $list);
     }
     
-    public function logout(){
-		redirect('login');
-	}
-	
+    public function confVis($idform){
+    	$funcao = $this->ConfirmacoesModel->getfuncao();
+    	if($funcao == "diretor")
+    		redirect("Entrou/controladorRequisitos/confirmarDirVis/".$idform);
+      if($funcao == "coordenador")
+    		redirect("Entrou/controladorRequisitos/confirmarCoorVis/".$idform);
+    }
+    
+	 public function confSubs($idform){
+	 	$funcao = $this->ConfirmacoesModel->getfuncao();
+    	if($this->ConfirmacoesModel->isProf($idform))
+    		redirect("Entrou/controladorRequisitos/confirmarProf/".$idform);
+    	else {
+    		if($funcao == "coordenador")
+    			redirect("Entrou/controladorRequisitos/confirmarCoorSubs/".$idform);
+    	}
+    }
 }

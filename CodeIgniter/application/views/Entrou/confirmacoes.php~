@@ -28,8 +28,8 @@ and open the template in the editor.
        	 		foreach($listavis as $form){
      	   			echo '<tr>
     								<td>'.$form->proponente_da_viagem.'</td>
-									<td><a href="#" > phpf </td>
-									<td><a href="#" > Confirmar </td>
+									<td><a href="confirmacoes/confVis/'.$form->idFormulario.'"> phpf </a></td>
+									<td><a href="#" > Confirmar</a> </td>
   								</tr>';
        	 		}
        	 }
@@ -49,8 +49,8 @@ and open the template in the editor.
        	 		foreach($listasubs as $form){
      	   			echo '<tr>
     								<td>'.$this->ConfirmacoesModel->getProf($form->materia).'</td>
-									<td><a href="#" > phpf </td>
-									<td><a href="#" > Confirmar </td>
+									<td><a href="confirmacoes/confSubs/'.$form->idFormularioSubs.'" > </a>phpf </td>
+									<td><a href="#" > Confirmar </a></td>
   								</tr>';
        	 		}
        	 }

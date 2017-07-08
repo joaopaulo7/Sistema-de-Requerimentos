@@ -16,9 +16,15 @@ class ConfirmacoesModel extends CI_Model {
         return $this->db->get_where("FormularioVisita", $funcao."_req =".$this->session->userdata('login'))-> result();
     }
     public function getListSubs(){
-        return $this->db->get_where("FormularioSubs", "professor_req =".$this->session->userdata('login'))-> result();
+        return $this->db->get_where("FormularioSubs", "professor_req =".$this->session->userdata('login')." or coordenador_req = ". $this->session->userdata('login'))-> result();
     }
     public function getProf($mat) {
-        return $this->db->get_where("Pessoa",' cadastro_identificador ='.$prof)-> result()[0]->nome;
+    	  $materia = $this->db->get_where("Materia",' idMateria ='.$mat)-> result();
+        return $this->db->get_where("Pessoa",' cadastro_identificador ='.$materia[0]->professor)-> result()[0]->nome;
+    }
+    
+    public function isProf($idform){
+        if($this->db->get_where("FormularioSubs", "idFormularioSubs = ".$idform)->result()[0]->professor_req != $this->session->userdata('login'))
+        	 return true;
     }
 }

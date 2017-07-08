@@ -62,7 +62,7 @@ class ControladorRequisitos extends CI_Controller {
 			$this->load->view('Entrou/confirmaFormSubs');
 			if($this->input->post() != null){
 				$this->ControladorModel->setProfessor($idform, $this->session->userdata('login'));
-				$confuser = $this->ControladorModel->setCoorReqSubs($this->session->userdata('login'));
+				$confuser = $this->ControladorModel->setCoorReqSubs($this->session->userdata('login'), $idform);
 				$this->mandarEmail($confuser->email);
 				$this->load->view('Entrou/confirmacaoEfetuada');
 			}
@@ -72,7 +72,7 @@ class ControladorRequisitos extends CI_Controller {
     public function confirmarCoorSubs($idform){
 			$this->load->view('Entrou/confirmaFormSubs');
 			if($this->input->post() != null){
-				$this->ControladorModel->setCoor($idform, $this->session->userdata('login'));
+				$this->ControladorModel->setCoorSubs($idform, $this->session->userdata('login'));
 				$this->load->view('Entrou/confirmacaoEfetuada');
 			}
 	 		  
