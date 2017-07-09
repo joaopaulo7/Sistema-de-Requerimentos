@@ -39,12 +39,8 @@ and open the template in the editor.
         		 </div>
         	</div>
        	<div class="copyright">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12">
-							<p>&copy; Todos os direitos reservados.</p>
-						</div>
-					</div>
+				<div class="col-md-12">
+					<p>Grupo Dedicação, Cefet-mg,Varginha &copy; Todos os direitos reservados.</p>
 				</div>
 			</div>
       </body>

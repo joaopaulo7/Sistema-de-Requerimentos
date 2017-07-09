@@ -9,9 +9,23 @@ and open the template in the editor.
         <title>Cadastro Sis.Req</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <?php 
+        		echo link_tag('Assets/css/bootstrap.min.css');
+        		echo link_tag('Assets/css/estilo.css');
+        ?>
     </head>
     <body>
-        <div>
+	 <nav class="navbar navbar-default" role="navigation">
+	 	<ul class="nav navbar-nav">
+    		<li><h1>Sistema de Requerimentos</h1>
+    		<div class="navbar-form navbar-right">
+    			<li ><?php echo anchor('login', 'Login', 'Login') ?>  	
+    		</div>
+   	 </ul>
+    	</nav>
+    </nav>
+			<div class="row">
+					<div id="conteudo" class="col-md-6 col-md-offset-3">
             <form method="POST" action="cadastrar/fazercadastro">
             
             
@@ -43,10 +57,10 @@ and open the template in the editor.
                 <?php echo form_error('funcao'); ?>
                 Função:
 				<select name = "funcao">
-					 <option value="Diretor">Diretor</option>
-					 <option value="Coordenador">Coordenador</option>
- 					 <option value="Professor">Professor</option>
-					 <option value="Aluno">Aluno</option>
+					 <option value="diretor">Diretor</option>
+					 <option value="coordenador">Coordenador</option>
+ 					 <option value="professor">Professor</option>
+					 <option value="aluno">Aluno</option>
 				</select><br>
                 
                 
@@ -76,8 +90,12 @@ and open the template in the editor.
                 </button>
             </form>
         </div>
-        <br>
-        <br>
-        <?php echo anchor('login', 'Login', 'Login') ?>
+        <div class="copyright">
+			<div class="col-md-12">
+				<p>Grupo Dedicação, Cefet-mg,Varginha &copy; Todos os direitos reservados.</p>
+		  	</div>
+		  </div>
+      </body>
+</html>
     </body>
 </html>

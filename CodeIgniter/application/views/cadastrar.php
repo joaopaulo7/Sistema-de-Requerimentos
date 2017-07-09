@@ -9,9 +9,21 @@ and open the template in the editor.
         <title>Cadastro Sis.Req</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <?php 
+        		echo link_tag('Assets/css/bootstrap.min.css');
+        		echo link_tag('Assets/css/estilo.css');
+        ?>
     </head>
     <body>
-        <div>
+	 <nav class="navbar navbar-default" role="navigation">
+	 	<ul class="nav navbar-nav">
+    		<li><h1>Sistema de Requerimentos</h1>
+    		<li ><?php echo anchor('login', 'Login', 'Login') ?>  	
+   	 </ul>
+    	</nav>
+    </nav>
+			<div class="row">
+					<div id="conteudo" class="col-md-6 col-md-offset-3">
             <form method="POST" action="cadastrar/fazercadastro">
             
             
@@ -76,8 +88,12 @@ and open the template in the editor.
                 </button>
             </form>
         </div>
-        <br>
-        <br>
-        <?php echo anchor('login', 'Login', 'Login') ?>
+        <div class="copyright">
+			<div class="col-md-12">
+				<p>Grupo Dedicação, Cefet-mg,Varginha &copy; Todos os direitos reservados.</p>
+		  	</div>
+		  </div>
+      </body>
+</html>
     </body>
 </html>
