@@ -29,9 +29,11 @@ input{
    border-radius: 6px;
    margin-top: 15%;
    margin-left: 40%; 
-   box-shadow: 5px 5px 1px #888888;
+   box-shadow: 5px 5px 5px #888888;
 }
-	
+
+h2{ margin-bottom: 10%; }
+
 .wrapper {
 	padding: 40px 0;
 }

@@ -20,7 +20,7 @@ and open the template in the editor.
     </nav>
 			<div class="row">
 					<div id="conteudo" class="col-md-6 col-md-offset-3">
-        
+        			<h2>Entrar</h2>
        			 <form method="POST" action="login/login">
         
           	       <label for="login">
