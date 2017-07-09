@@ -116,7 +116,7 @@ class Cadastrar extends CI_Controller {
       	    $this->load->view('cadastroEfetuado');
       	  }
       	else
-             $this->index();        
+             redirect("cadastrar");        
 	 }
 	 
 	 public function confirmaEmail($usuario){

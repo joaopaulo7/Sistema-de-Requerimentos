@@ -1,5 +1,5 @@
 *{
-    color: #C4C76C;
+    color: #D5D87D;
 }
 
 
@@ -20,19 +20,17 @@ input{
 	margin-bottom: 10%;
 }
 
-.container{
-	align: center;
-}
 
 #conteudo{
 	padding: 2% 0;
 	text-align: center;
 	background-color: #53CBBF;
-   width: 25%;
-   height: 25%;
-   border-radius: 6px;
-   margin-top: 15%;
-   margin-left: 40%; 
+   width: 30%;
+   height: 30%;
+   border-radius: 15px;
+	top: 25%;
+	left: 15%;
+   position: absolute;
    box-shadow: 5px 5px 5px #888888;
 }
 
@@ -63,6 +61,9 @@ footer {
 	padding: 5px 0;
 	background-color: #666;
 	color: #fff;
+	width: 100%;
+	bottom: 0px;
+   position: absolute;
 }
 
 .copyright p {

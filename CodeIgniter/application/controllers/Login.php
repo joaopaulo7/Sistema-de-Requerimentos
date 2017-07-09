@@ -11,10 +11,12 @@ class Login extends CI_Controller {
         $this->load->library("form_validation");
         $this->load->model("Loginmodel");
     }
-
+	 
+	 private $erro = "";
+	 
     public function index() {
         $this->session->sess_destroy();
-        $this->load->view('login');
+        $this->load->view('login', array( "erro" =>$this->erro));
     }
     
     public function login() {
@@ -23,7 +25,8 @@ class Login extends CI_Controller {
         $this->form_validation->set_rules("login", "Login", "required");
         $this->form_validation->set_rules("senha", "Senha", "required");
         if($this->form_validation->run() == FALSE) {
-            echo "Preencha todos os campos!!!";
+             $this->erro = "Preencha todos os campos";
+             $this->index();
         } else {
             $dados["senha"] = sha1($dados["senha"]);
             $resultado = $this->Loginmodel->verificaAcesso($dados);
@@ -31,7 +34,8 @@ class Login extends CI_Controller {
                 $this->session->set_userdata($resultado[0]);
                 redirect("Entrou/menu");
             } else {
-                echo "Login ou senha incorretos!!!";
+                $this->erro = "Login ou senha incorretos";
+                redirect('login');
             }                
         }
     }
