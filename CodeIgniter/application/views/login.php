@@ -9,25 +9,34 @@ and open the template in the editor.
         <title>Login Sis.Req</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        		  <?php 
+        		  echo link_tag('Assets/css/bootstrap.min.css');
+        		  echo link_tag('Assets/css/estilo.css');
+        ?>
     </head>
     <body>
-        <div>
+	 <nav class="navbar navbar-default" role="navigation">
+    	<h1>Sistema de Requerimentos</h1>
+    </nav>
+			<div class="row">
+					<div id="conteudo" class="col-md-6 col-md-offset-3">
         
-        <form method="POST" action="login/login">
+       			 <form method="POST" action="login/login">
         
-                <label for="login">
-                    Login:
-                </label>
-                <input type="text" id="login" name="login"><br>
-                <label for="senha">
-                    Senha:
-                </label>
-                <input type="password" name="senha" id="senha"><br>
-                <button type="submit">
-                    Enviar
-                </button>
-            </form>
-            <?php echo anchor('cadastrar', 'Cadastrar', 'Cadastrar') ?>
-        </div>
+          	       <label for="login">
+        	          	  Login:
+           	     	 </label>
+         	       <input type="text" id="login" name="login"><br>
+         	       <label for="senha">
+          	          Senha:
+         	       </label>
+         	       <input type="password" name="senha" id="senha"><br>
+         	       <button type="submit">
+         	           Enviar
+         	       </button>
+         	   </form>
+          	  <?php echo anchor('cadastrar', 'Cadastrar', 'Cadastrar') ?>
+        		 </div>
+        	</div>
       </body>
 </html>

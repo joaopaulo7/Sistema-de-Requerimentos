@@ -29,16 +29,13 @@ class Login extends CI_Controller {
             $resultado = $this->Loginmodel->verificaAcesso($dados);
             if(count($resultado) == 1) {
                 $this->session->set_userdata($resultado[0]);
-                redirect($link);
+                redirect("Entrou/menu");
             } else {
                 echo "Login ou senha incorretos!!!";
             }                
         }
     }
     
-    public function loginEsp("Entrou/menu") {
-			$this->load->view('login', $link);
-    }
     public function logout() {
         redirect("/login");
     }
