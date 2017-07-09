@@ -1,3 +1,7 @@
+*{
+    color: #D5D87D;
+}
+
 
 body{
 	background-color: #f5f5f5;
@@ -36,8 +40,18 @@ h2{ margin-bottom: 10%; }
 
 h1{ margin-left: 1%; }
 
-.wrapper {
-	padding: 40px 0;
+button {
+    background-color: #FA7785;
+    border: none;
+    color: #E6E98E;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 6px;
+    box-shadow: 2px 2px 2px #888888;
 }
 
 footer {
@@ -50,6 +64,7 @@ footer {
 	background-color: #666;
 	color: #fff;
 }
+
 .copyright p {
 	margin: 0; 
 }
