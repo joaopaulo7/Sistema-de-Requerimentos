@@ -37,6 +37,11 @@ and open the template in the editor.
          	       </label>
          	       <input type="password" name="novasenha" id="novasenha"><br>
          	       
+         	       <label for="confsenha">
+          	          Confirmar Nova Senha:
+         	       </label>
+         	       <input type="password" name="confsenha" id="confsenha"><br>
+         	       
          	       <hr>
          	              
          	       <label for="senha">

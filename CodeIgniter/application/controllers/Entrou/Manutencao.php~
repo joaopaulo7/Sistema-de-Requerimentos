@@ -58,7 +58,7 @@ class Manutencao extends CI_Controller {
     public function alterar(){
     	  $dados = $this->input->post();
 		  
-		  
+		          echo $dados['email'];    
         $this->form_validation->set_data($dados);
         
               	  
@@ -68,9 +68,9 @@ class Manutencao extends CI_Controller {
                 'valid_email'   => 'Esse %s não é válido.'
                 //,'is_unique'     => 'Esse %s já existe.'
                 ));
-                
-        if($dados['novasenha']!="")                   
-        $this->form_validation->set_rules('confsenha', 'Confirmar Nova Senha', 'matches[novasenha]',array(
+                   
+           
+        $this->form_validation->set_rules('confsenha', 'Confirmar Nova Senha', 'matches[outraSenha]',array(
         		   						'matches'       => 'As senhas não são iguais'));
         
         $this->form_validation->set_rules("senha", "senha", "required", array(
@@ -83,12 +83,12 @@ class Manutencao extends CI_Controller {
           $resultado = $this->ManutencaoModel->verificaAcesso($dados);
         	 if(count($resultado) == 1) 
         	 {
-        			 if($dados['novasenha']!="")
+        			 if($dados['outraSenha']!="")
         			 {
 
         		   						
         		   		if($this->form_validation->run()){			
-					 				$this->ManutencaoModel->setSenha(sha1($dados['novasenha']));
+					 				$this->ManutencaoModel->setSenha(sha1($dados['outraSenha']));
 					 	   }		 
         					else 
         			 	   		$this->load->view('Entrou/erroManutencao');

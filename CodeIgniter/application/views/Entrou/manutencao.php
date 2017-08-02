@@ -32,10 +32,10 @@ and open the template in the editor.
          	       ';
          	       ?>
          	       
-         	       <label for="novasenha">
+         	       <label for="outraSenha">
           	          Nova Senha(opicional):
          	       </label>
-         	       <input type="password" name="novasenha" id="novasenha"><br>
+         	       <input type="password" name="outraSenha" id="outraSenha"><br>
          	       
          	       <label for="confsenha">
           	          Confirmar Nova Senha:
