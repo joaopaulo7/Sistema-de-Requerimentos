@@ -16,6 +16,7 @@ and open the template in the editor.
         echo anchor('Entrou/criarFormularioSubstituicao', 'Requerir Substituicao').br();
         echo anchor('Entrou/criarFormularioVisita', 'Requerir Visita').br().br();
         echo anchor('login/logout', 'Logout', 'title="Logout"');
+        echo anchor('Entrou/manutencao', 'Manutencao').br().br();
         ?>
     </body>
 </html>
