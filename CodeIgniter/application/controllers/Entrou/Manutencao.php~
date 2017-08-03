@@ -58,8 +58,9 @@ class Manutencao extends CI_Controller {
     public function alterar(){
     	  $dados = $this->input->post();
 		  
-		          echo $dados['email'];    
-        $this->form_validation->set_data($dados);
+		  echo $dados['email'].$dados['confsenha'].$dados['outraSenha'];
+		  
+		  $this->form_validation->set_data($dados);
         
               	  
       	  
@@ -68,13 +69,13 @@ class Manutencao extends CI_Controller {
                 'valid_email'   => 'Esse %s não é válido.'
                 //,'is_unique'     => 'Esse %s já existe.'
                 ));
-                   
+                
            
-        $this->form_validation->set_rules('confsenha', 'Confirmar Nova Senha', 'matches[outraSenha]',array(
-        		   						'matches'       => 'As senhas não são iguais'));
+        $this->form_validation->set_rules('outraSenha', 'Confirmar Nova Senha', 'required|matches[confsenha]',array(
+        	   						'matches'       => 'As senhas não são iguais'));
         
         $this->form_validation->set_rules("senha", "senha", "required", array(
-                'required'      => 'Você não escreveu o %s.'));
+                					'required'      => 'Você não escreveu o %s.'));
         
 
         if($this->form_validation->run())
@@ -91,7 +92,7 @@ class Manutencao extends CI_Controller {
 					 				$this->ManutencaoModel->setSenha(sha1($dados['outraSenha']));
 					 	   }		 
         					else 
-        			 	   		$this->load->view('Entrou/erroManutencao');
+        			 	   		$this->load->view('Entrou/manutencao');
         			 }
         			 if($dados['email']!=$this->ManutencaoModel->getEmail())
         			 {
@@ -104,6 +105,6 @@ class Manutencao extends CI_Controller {
              $this->index();
         }
         else
-             $this->load->view('Entrou/erroManutencao',array('email' => $this->ManutencaoModel->getEmail()));
+             $this->load->view('Entrou/manutencao',array('email' => $this->ManutencaoModel->getEmail()));
 	 }
 }

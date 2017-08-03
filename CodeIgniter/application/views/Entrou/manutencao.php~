@@ -20,9 +20,9 @@ and open the template in the editor.
     </nav>
 			<div class="row">
 					<div id="conteudo" class="col-md-6 col-md-offset-3">
-        			<h2>Entrar</h2>
-       			 <form method="POST" action="manutencao/alterar">
+       			 <form method="POST" action="Entrou/manutencao/alterar">
        			 
+       			    <?php echo form_error('email'); ?>
        			 	 <?php
        			 	 echo '
           	       <label for="email">
@@ -32,18 +32,19 @@ and open the template in the editor.
          	       ';
          	       ?>
          	       
-         	       <label for="novasenha">
+         	       <label for="outraSenha">
           	          Nova Senha(opicional):
          	       </label>
-         	       <input type="password" name="novasenha" id="novasenha"><br>
+         	       <input type="password" name="outraSenha" id="outraSenha"><br>
          	       
+         	       <?php echo form_error('confsenha'); ?>
          	       <label for="confsenha">
           	          Confirmar Nova Senha:
          	       </label>
          	       <input type="password" name="confsenha" id="confsenha"><br>
          	       
          	       <hr>
-         	              
+         	       <?php echo form_error('senha'); ?>
          	       <label for="senha">
           	          Senha:
          	       </label>
@@ -53,7 +54,6 @@ and open the template in the editor.
          	           Enviar
          	       </button>
          	   </form>
-          	  <?php echo anchor('cadastrar', 'Cadastrar', 'Cadastrar') ?>
         		 </div>
         	</div>
        	<div class="copyright">

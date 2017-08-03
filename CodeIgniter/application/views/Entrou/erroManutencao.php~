@@ -23,6 +23,7 @@ and open the template in the editor.
         			<h2>Entrar</h2>
        			 <form method="POST" action="alterar">
        			 
+       			    <?php echo form_error('email'); ?>
        			 	 <?php
        			 	 echo '
           	       <label for="email">
