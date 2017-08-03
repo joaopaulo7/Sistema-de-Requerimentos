@@ -20,7 +20,7 @@ and open the template in the editor.
     </nav>
 			<div class="row">
 					<div id="conteudo" class="col-md-6 col-md-offset-3">
-       			 <form method="POST" action="Entrou/manutencao/alterar">
+       			<?php echo '<form method="POST" action="'.base_url('Entrou/manutencao/alterar').'">'?>
        			 
        			    <?php echo form_error('email'); ?>
        			 	 <?php
@@ -32,6 +32,7 @@ and open the template in the editor.
          	       ';
          	       ?>
          	       
+         	       <?php echo form_error('confsenha'); ?>
          	       <label for="outraSenha">
           	          Nova Senha(opicional):
          	       </label>

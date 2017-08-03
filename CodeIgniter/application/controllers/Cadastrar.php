@@ -96,8 +96,9 @@ class Cadastrar extends CI_Controller {
                 'is_unique'     => 'Esse %s já existe.'));
         
         
-     	  $this->form_validation->set_rules("senha", "Senha", "required", array(
-     	        'required'      => 'Você não escreveu o %s.'));
+     	  $this->form_validation->set_rules("senha", "Senha", "required|min_length[7]", array(
+     	        'required'      => 'Você não escreveu o %s.',
+     	        'min_length'    => 'Senha muito pequena'));
         
         
         $this->form_validation->set_rules('confsenha', 'Confirmar Senha', 'required|matches[senha]',array(

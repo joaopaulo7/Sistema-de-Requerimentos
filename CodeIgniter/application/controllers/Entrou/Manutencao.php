@@ -64,14 +64,14 @@ class Manutencao extends CI_Controller {
         
               	  
       	  
-        $this->form_validation->set_rules('email', 'email', 'required|valid_email'/*|is_unique[Pessoa.email]'*/, array(
-                'required'      => 'Você não escreveu o %s.',
-                'valid_email'   => 'Esse %s não é válido.'
-                //,'is_unique'     => 'Esse %s já existe.'
-                ));
-                
+        $this->form_validation->set_rules('email', 'email', 'required|valid_email', array(
+               					 'required'      => 'Você não escreveu o %s.',
+              						 'valid_email'   => 'Esse %s não é válido.'));
+              						 
+        $this->form_validation->set_rules('outraSenha', 'outraSenha', 'min_length[7]', array(
+                 					 'min_length'   =>  'A senha é muito pequena'));      
            
-        $this->form_validation->set_rules('outraSenha', 'outraSenha', 'required|matches[confsenha]',array(
+        $this->form_validation->set_rules('confsenha', 'confsenha', 'matches[outraSenha]',array(
         	   						'matches'       => 'As senhas não são iguais'));
         
         $this->form_validation->set_rules("senha", "senha", "required", array(
