@@ -18,15 +18,13 @@ and open the template in the editor.
 	 <nav class="navbar navbar-default" role="navigation">
 	 	<ul class="nav navbar-nav">
     		<li><h1>Sistema de Requerimentos</h1>
-    		<div class="navbar-form navbar-right">
-    			<li ><?php echo anchor('login', 'Login', 'Login') ?>  	
-    		</div>
+    		<li ><?php echo anchor('login', 'Login', 'Login') ?>  	
    	 </ul>
     	</nav>
     </nav>
 			<div class="row">
 					<div id="conteudo" class="col-md-6 col-md-offset-3">
-            <form method="POST" action="cadastrar/fazercadastro">
+            <form method="POST" action= base_url("cadastrar/fazercadastro")>
             
             
             	 <?php echo form_error('nome'); ?>

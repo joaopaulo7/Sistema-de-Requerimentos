@@ -20,22 +20,27 @@ and open the template in the editor.
     </nav>
 			<div class="row">
 					<div id="conteudo" class="col-md-6 col-md-offset-3">
-        			<h2>Entrar</h2>
-       			 <?php echo '<form method="POST" action="'.base_url('login/login').'">'?>
-        				 <?php echo $erro; ?><br>
-          	       <label for="login">
-        	          	  Login:
+					<h1>Confirme sua entrada antes de alterar</h1>
+					<?php echo $erro; ?>
+       			<?php echo '<form method="POST" action="'.base_url('Entrou/manutencao/entrar').'">'?>
+       			 
+       			    <?php echo form_error('cadastro_identificador'); ?>
+          	       <label for="cadastro_identificador">
+        	          	  Cadastro Identificador:
            	     	 </label>
-         	       <input type="text" id="login" name="login"><br>
+         	       <input type="text" id="cadastro_identificador" name="cadastro_identificador"><br>
+         	       
+         	       
+         	       <?php echo form_error('senha'); ?>
          	       <label for="senha">
           	          Senha:
          	       </label>
          	       <input type="password" name="senha" id="senha"><br>
+         	       
          	       <button type="submit">
          	           Enviar
          	       </button>
          	   </form>
-          	  <?php echo anchor('cadastrar', 'Cadastrar', 'Cadastrar') ?>
         		 </div>
         	</div>
        	<div class="copyright">

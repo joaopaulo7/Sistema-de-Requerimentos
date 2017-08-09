@@ -44,13 +44,6 @@ and open the template in the editor.
          	       </label>
          	       <input type="password" name="confsenha" id="confsenha"><br>
          	       
-         	       <hr>
-         	       <?php echo form_error('senha'); ?>
-         	       <label for="senha">
-          	          Senha:
-         	       </label>
-         	       <input type="password" name="senha" id="senha"><br>
-         	       
          	       <button type="submit">
          	           Enviar
          	       </button>

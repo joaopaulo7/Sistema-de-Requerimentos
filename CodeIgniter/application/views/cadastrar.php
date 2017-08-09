@@ -24,7 +24,7 @@ and open the template in the editor.
     </nav>
 			<div class="row">
 					<div id="conteudo" class="col-md-6 col-md-offset-3">
-            <form method="POST" action="cadastrar/fazercadastro">
+            <?php echo '<form method="POST" action="'.base_url('cadastrar/fazerCadastro').'">'?>
             
             
             	 <?php echo form_error('nome'); ?>

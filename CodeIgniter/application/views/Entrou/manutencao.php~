@@ -32,7 +32,7 @@ and open the template in the editor.
          	       ';
          	       ?>
          	       
-         	       <?php echo form_error('confsenha'); ?>
+         	       <?php echo form_error('outraSenha'); ?>
          	       <label for="outraSenha">
           	          Nova Senha(opicional):
          	       </label>
@@ -43,13 +43,6 @@ and open the template in the editor.
           	          Confirmar Nova Senha:
          	       </label>
          	       <input type="password" name="confsenha" id="confsenha"><br>
-         	       
-         	       <hr>
-         	       <?php echo form_error('senha'); ?>
-         	       <label for="senha">
-          	          Senha:
-         	       </label>
-         	       <input type="password" name="senha" id="senha"><br>
          	       
          	       <button type="submit">
          	           Enviar

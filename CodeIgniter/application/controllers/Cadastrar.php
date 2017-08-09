@@ -69,8 +69,6 @@ class Cadastrar extends CI_Controller {
 		  		$this->form_validation->set_rules("idUsuario", "Id Usuario", "is_unique[Usuario.idUsuario]", array('is_unique' => 'Erro de aleatoriedade  no %s.'));
 		  }
 		  
-		  
-        $this->form_validation->set_data($cadastro);
         
         
         $this->form_validation->set_rules("nome", "Nome", "required", array(
@@ -90,8 +88,8 @@ class Cadastrar extends CI_Controller {
                 'required'      => 'Você não escreveu o %s.'));
         
         
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email'/*|is_unique[Pessoa.email]'*/, array(
-                /*'required'      => 'Você não escreveu o %s.',*/
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[Pessoa.email]', array(
+                'required'      => 'Você não escreveu o %s.',
                 'valid_email'   => 'Esse %s não é válido.',
                 'is_unique'     => 'Esse %s já existe.'));
         
@@ -101,7 +99,7 @@ class Cadastrar extends CI_Controller {
      	        'min_length'    => 'Senha muito pequena'));
         
         
-        $this->form_validation->set_rules('confsenha', 'Confirmar Senha', 'required|matches[senha]',array(
+        $this->form_validation->set_rules("confsenha", "Confirmar Senha", "required|matches[senha]",array(
         	    'required'      => 'Você não escreveu o %s.',
         		'matches'       => 'As senhas não são iguais'));
         
@@ -117,7 +115,7 @@ class Cadastrar extends CI_Controller {
       	    $this->load->view('cadastroEfetuado');
       	  }
       	else
-             redirect("cadastrar");        
+             $this->index();        
 	 }
 	 
 	 public function confirmaEmail($usuario){

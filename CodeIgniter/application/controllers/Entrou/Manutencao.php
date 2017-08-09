@@ -15,9 +15,10 @@ class Manutencao extends CI_Controller {
         }
     }
     
+    private $erro = "";
+    	
     public function index() {
-    	$info['email']= $this->ManutencaoModel->getEmail();
-		$this->load->view('Entrou/manutencao', $info);
+		    $this->load->view("Entrou/entrarManutencao", array( "erro" =>$this->erro));
     }
     
     public function mandarEmailConf($usuario, $email){
@@ -55,17 +56,46 @@ class Manutencao extends CI_Controller {
 	 	}
     }
     
+    public function entrar(){
+    	  $conf = $this->input->post();
+    	  
+		  $this->form_validation->set_data($conf);
+		
+		  $this->form_validation->set_rules('cadastro_identificador', 'Cadastro Identificador', 'required', array(
+                'required'      => 'Você não escreveu o %s.'));
+        
+        
+     	  $this->form_validation->set_rules("senha", "Senha", "required", array(
+     	        'required'      => 'Você não escreveu o %s.'));
+     	       
+     	  if($this->form_validation->run()){
+				  $conf['senha'] = sha1($conf['senha']);
+				  redirect(base_url("Entrou/manutencao/entrou/".$this->session->userdata('login')."/".$conf['senha']));
+		  }
+		  else
+				  $this->index();
+		  }
+    
+    public function entrou($login, $senha){
+		if($this->ManutencaoModel->confirma($login, $senha)){
+			$info['email']= $this->ManutencaoModel->getEmail();
+			$this->load->view('Entrou/manutencao', $info);
+		}
+		else{
+			$this->erro = "Senha ou Usuário incorretos";
+			$this->index();
+		}
+	}
+    
     public function alterar(){
-    	  $dados = $this->input->post();
+    	$dados = $this->input->post();
 		  
-		  echo $dados['email'].$dados['confsenha'].$dados['outraSenha'];
-		  
-		  $this->form_validation->set_data($dados);
+		$this->form_validation->set_data($dados);
         
               	  
       	  
         $this->form_validation->set_rules('email', 'email', 'required|valid_email', array(
-               					 'required'      => 'Você não escreveu o %s.',
+									'required'      => 'Você não escreveu o %s.',
               						 'valid_email'   => 'Esse %s não é válido.'));
               						 
         $this->form_validation->set_rules('outraSenha', 'outraSenha', 'min_length[7]', array(
@@ -74,37 +104,26 @@ class Manutencao extends CI_Controller {
         $this->form_validation->set_rules('confsenha', 'confsenha', 'matches[outraSenha]',array(
         	   						'matches'       => 'As senhas não são iguais'));
         
-        $this->form_validation->set_rules("senha", "senha", "required", array(
-                					'required'      => 'Você não escreveu o %s.'));
-        
 
         if($this->form_validation->run())
      	  {
-     	  	 $dados["senha"] = sha1($dados["senha"]);
-          $resultado = $this->ManutencaoModel->verificaAcesso($dados);
-        	 if(count($resultado) == 1) 
-        	 {
-        			 if($dados['outraSenha']!="")
-        			 {
-
-        		   						
-        		   		if($this->form_validation->run()){			
-					 				$this->ManutencaoModel->setSenha(sha1($dados['outraSenha']));
-					 	   }		 
-        					else 
-        			 	   		$this->load->view('Entrou/manutencao');
-        			 }
-        			 if($dados['email']!=$this->ManutencaoModel->getEmail())
-        			 {
-      		    		$this->mandarEmailConf( $this->session->userdata('idUsuario'), $dados['email']);
-  	  		   	 		$this->ManutencaoModel->setEmail($dados['email']);			 
-        			 }
-        			 $this->load->view('manutencaoEfetuada');	
-      	 }
-      	 else
-             $this->index();
-        }
-        else
+        		if($dados['outraSenha']!="")
+        		{
+										
+					if($this->form_validation->run()){			
+					 		$this->ManutencaoModel->setSenha(sha1($dados['outraSenha']));
+					}	 
+        			else 
+        			 	   	$this->load->view('Entrou/manutencao');
+        			}
+        		if($dados['email']!=$this->ManutencaoModel->getEmail())
+        		{
+      		    	$this->mandarEmailConf( $this->session->userdata('idUsuario'), $dados['email']);
+  	  		   	 	$this->ManutencaoModel->setEmail($dados['email']);			 
+        		}
+        		$this->load->view('manutencaoEfetuada');	
+		  }
+		  else
              $this->load->view('Entrou/manutencao',array('email' => $this->ManutencaoModel->getEmail()));
 	 }
 }

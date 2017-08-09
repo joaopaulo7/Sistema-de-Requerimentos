@@ -12,7 +12,7 @@ class Login extends CI_Controller {
         $this->load->model("Loginmodel");
     }
 	 
-	 private $erro = "";
+	private $erro = "";
 	 
     public function index() {
         $this->session->sess_destroy();
@@ -34,8 +34,8 @@ class Login extends CI_Controller {
                 $this->session->set_userdata($resultado[0]);
                 redirect("Entrou/menu");
             } else {
-                $this->erro = "Login ou senha incorretos";
-                redirect('login');
+                $this->erro = "Login/senha incorretos ou e-mail não confirmado";
+                $this->index();
             }                
         }
     }
