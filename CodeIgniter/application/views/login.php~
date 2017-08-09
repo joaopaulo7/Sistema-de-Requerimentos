@@ -16,33 +16,35 @@ and open the template in the editor.
     </head>
     <body>
 	 <nav class="navbar navbar-default" role="navigation">
-    	<h1>Sistema de Requerimentos</h1>
+    	<h1>Sistema de coordenação de visitas técnicas e substituições de professores</h1>
     </nav>
 			<div class="row">
 					<div id="conteudo" class="col-md-6 col-md-offset-3">
-        			<h2>Entrar</h2>
+        			<h2>Login</h2>
        			 <form method="POST" action="login/login">
         				 <?php echo $erro; ?><br>
-          	       <label for="login">
+          	       <label style = "color: white;"for="login">
         	          	  Login:
            	     	 </label>
          	       <input type="text" id="login" name="login"><br>
-         	       <label for="senha">
+         	       <label style = "color: white;"for="senha">
           	          Senha:
          	       </label>
          	       <input type="password" name="senha" id="senha"><br>
          	       <button type="submit">
-         	           Enviar
+         	           Entrar
          	       </button>
          	   </form>
-          	  <?php echo anchor('cadastrar', 'Cadastrar', 'Cadastrar') ?>
+          	  
+          	  <h6><?php echo anchor('alterar', 'Esqueceu sua senha? ', 'Alterar') ?></h6>
+          	  <div id="cadastro">
+          	   <?php echo anchor('cadastrar', 'Não possui uma conta? Cadastre-se aqui!', 'Cadastrar') ?> 
+          	   </div>
         		 </div>
         	</div>
        	<div class="copyright">
-						<div class="col-md-12">
-							<p>Grupo Dedicação, Cefet-mg,Varginha &copy; Todos os direitos reservados.</p>
-						</div>
-					</div>
+				<div class="col-md-12">
+					<p>Grupo Dedicação, Cefet-MG - CAMPUS VIII / Unidade Varginha &copy; Todos os direitos reservados.</p>
 				</div>
 			</div>
       </body>

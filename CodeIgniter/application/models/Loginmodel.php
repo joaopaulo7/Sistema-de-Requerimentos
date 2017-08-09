@@ -17,4 +17,5 @@ class Loginmodel extends CI_Model {
         if($this->db->count_all_results() == 1)
 			return $resultado->result_array();
     }
+    //public function getDados() {
 }
