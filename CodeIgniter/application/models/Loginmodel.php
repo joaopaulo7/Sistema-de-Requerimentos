@@ -17,5 +17,11 @@ class Loginmodel extends CI_Model {
         if($this->db->count_all_results() == 1)
 			return $resultado->result_array();
     }
-    //public function getDados() {
+    public function getDados($email){
+		$this->db->where('email', $email);
+		$resultado = $this->db->get('Pessoa')->result();
+		
+		$this->db->where('login', $resultado[0]->cadastro_identificador);
+		return $this->db->get('Usuario')->result();
+	}
 }

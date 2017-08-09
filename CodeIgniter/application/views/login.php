@@ -21,7 +21,7 @@ and open the template in the editor.
 			<div class="row">
 					<div id="conteudo" class="col-md-6 col-md-offset-3">
         			<h2>Login</h2>
-       			 <form method="POST" action="login/login">
+       			<?php echo '<form method="POST" action="'.base_url('login/login').'">'?>
         				 <?php echo $erro; ?><br>
           	       <label style = "color: white;"for="login">
         	          	  Login:
@@ -36,7 +36,7 @@ and open the template in the editor.
          	       </button>
          	   </form>
           	  
-          	  <h6><?php echo anchor('alterar', 'Esqueceu sua senha? ', 'Alterar') ?></h6>
+          	  <h6><?php echo anchor('login/esqueceu', 'Esqueceu sua senha? ', 'esqueceu') ?></h6>
           	  <div id="cadastro">
           	   <?php echo anchor('cadastrar', 'Não possui uma conta? Cadastre-se aqui!', 'Cadastrar') ?> 
           	   </div>

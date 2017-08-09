@@ -10,12 +10,9 @@ class Manutencao extends CI_Controller {
         $this->load->library("session");
         $this->load->model("ManutencaoModel");
         $this->load->library("form_validation");
-        if(!$this->session->userdata("idUsuario")) {
-            redirect("login");
-        }
     }
     
-    private $erro = "";
+    private $erro = "", $loginu;
     	
     public function index() {
 		    $this->load->view("Entrou/entrarManutencao", array( "erro" =>$this->erro));
@@ -78,7 +75,8 @@ class Manutencao extends CI_Controller {
     
     public function entrou($login, $senha){
 		if($this->ManutencaoModel->confirma($login, $senha)){
-			$info['email']= $this->ManutencaoModel->getEmail();
+			$this->loginu = $login;
+			$info['email']= $this->ManutencaoModel->getEmail($this->loginu)[0]->email;
 			$this->load->view('Entrou/manutencao', $info);
 		}
 		else{
@@ -109,17 +107,15 @@ class Manutencao extends CI_Controller {
      	  {
         		if($dados['outraSenha']!="")
         		{
-										
-					if($this->form_validation->run()){			
-					 		$this->ManutencaoModel->setSenha(sha1($dados['outraSenha']));
-					}	 
-        			else 
-        			 	   	$this->load->view('Entrou/manutencao');
-        			}
-        		if($dados['email']!=$this->ManutencaoModel->getEmail())
+											
+					$this->ManutencaoModel->setSenha(sha1($dados['outraSenha']),$this->loginu);
+				}	 
+        		else 
+        			$this->load->view('Entrou/manutencao');
+        		if($dados['email']!=$this->ManutencaoModel->getEmail($this->loginu))
         		{
       		    	$this->mandarEmailConf( $this->session->userdata('idUsuario'), $dados['email']);
-  	  		   	 	$this->ManutencaoModel->setEmail($dados['email']);			 
+  	  		   	 	$this->ManutencaoModel->setEmail($dados['email'],$this->loginu);			 
         		}
         		$this->load->view('manutencaoEfetuada');	
 		  }
