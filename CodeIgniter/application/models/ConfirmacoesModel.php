@@ -25,7 +25,7 @@ class ConfirmacoesModel extends CI_Model {
     }    
     
     public function getListSubs(){
-        return $this->db->get_where("FormularioSubs", "professor_req =".$this->session->userdata('login')." or coordenador_req = ". $this->session->userdata('login'))-> result();
+        return $this->db->get_where("FormularioSubs", "Professor_req =".$this->session->userdata('login')." or coordenador_req = ". $this->session->userdata('login'))-> result();
     }
     
     public function getPessoa($id) {

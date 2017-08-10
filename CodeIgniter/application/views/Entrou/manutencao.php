@@ -21,15 +21,17 @@ and open the template in the editor.
 			<div class="row">
 					<div id="conteudo" class="col-md-6 col-md-offset-3">
        			<?php echo '<form method="POST" action="'.base_url('Entrou/manutencao/alterar').'">'?>
-       			 
-       			    <?php echo form_error('email'); ?>
-       			 	 <?php
+					<?php
        			 	 echo '
-          	       <label for="email">
-        	          	  Email:
-           	     	 </label>
-         	       <input type="text" id="email" name="email" value="' .$email. '"><br>
-         	       ';
+					   <input type="hidden" id="login" name="login" value="' .$login. '">
+					   ';
+					echo form_error('email');
+       			 	echo '
+					   <label for="email">
+							  Email:
+						 </label>
+					   <input type="text" id="email" name="email" value="' .$email. '"><br>
+					   ';
          	       ?>
          	       
          	       <?php echo form_error('outraSenha'); ?>

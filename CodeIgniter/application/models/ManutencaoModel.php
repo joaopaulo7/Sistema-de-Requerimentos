@@ -7,7 +7,7 @@ class ManutencaoModel extends CI_Model {
         parent::__construct();
     }
     public function getEmail($dado) {
-        return $this->db->get_where("Pessoa", "cadastro_identificador =".$dado)-> result();
+        return $this->db->get_where("Pessoa", "cadastro_identificador =".$dado)-> result()[0]->email;
     }
     
     public function setEmail($dado, $login) {

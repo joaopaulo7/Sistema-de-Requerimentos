@@ -16,7 +16,7 @@ class Confirmacoes extends CI_Controller {
     
     public function index(){
     	$funcao = $this->ConfirmacoesModel->getfuncao();
-    	if($funcao!= 'professor')
+    	if($funcao!= 'Professor')
     		$list['listavis'] = $this->ConfirmacoesModel->getListVis($funcao);
     		$list['listasubs'] = $this->ConfirmacoesModel->getListSubs();
 		$this->load->view('Entrou/confirmacoes', $list);
@@ -24,9 +24,9 @@ class Confirmacoes extends CI_Controller {
     
     public function confVis($idform){
     	$funcao = $this->ConfirmacoesModel->getfuncao();
-    	if($funcao == "diretor")
+    	if($funcao == "Diretor")
     		redirect("Entrou/controladorRequisitos/confirmarDirVis/".$idform);
-      if($funcao == "coordenador")
+		if($funcao == "Coordenador")
     		redirect("Entrou/controladorRequisitos/confirmarCoorVis/".$idform);
     }
     
@@ -35,12 +35,17 @@ class Confirmacoes extends CI_Controller {
     	if($this->ConfirmacoesModel->isProf($idform))
     		redirect("Entrou/controladorRequisitos/confirmarProf/".$idform);
     	else {
-    		if($funcao == "coordenador")
+    		if($funcao == "Coordenador")
     			redirect("Entrou/controladorRequisitos/confirmarCoorSubs/".$idform);
     	}
     }
     public function pdfSubs($id) {
     	$formulario['form'] = $this->ConfirmacoesModel->getFormSubs($id);
-    	$this->load->view('Entrou/pdfSubs', $formulario );
+    	$this->load->view('Entrou/pdfSubs', $formulario);
+    }
+    
+    public function pdfVis($id) {
+    	$formulario['form'] = $this->ConfirmacoesModel->getFormVis($id);
+    	$this->load->view('Entrou/pdfVis', $formulario);
     }
 }

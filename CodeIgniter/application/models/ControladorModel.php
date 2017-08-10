@@ -40,8 +40,8 @@ class ControladorModel extends CI_Model{
     	$coor = $this->db->get('Coordenador')->result_object()[0];
     	
     	$this->db->where('idFormulario', $idform);
-    	$this->db->update('FormularioVisita', array('coordenador_req'=>$coor->idcoordenador));
-    	return $this->getProfessor($coor->idcoordenador);
+    	$this->db->update('FormularioVisita', array('coordenador_req'=>$coor->idCoordenador));
+    	return $this->getProfessor($coor->idCoordenador);
     }
     
     public function setDirReq($idform){

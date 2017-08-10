@@ -29,7 +29,7 @@ class CriarMateria extends CI_Controller {
 		  $this->form_validation->set_data($cadastro);
 	     $this->form_validation->set_rules("idMateria", "Id Materia", "is_unique[Materia.idMateria]", array('is_unique' => 'Erro de aleatoriedade  no %s.'));
 	     while(!$this->form_validation->run()) {
-	  	       $cadastro['idMateria'] = rand(0, 1000000);
+				$cadastro['idMateria'] = rand(0, 1000000);
 			    $this->form_validation->set_data($cadastro);
 	 		    $this->form_validation->set_rules("idMateria", "Id Materia Subs", "is_unique[Materia.idMateria]", array('is_unique' => 'Erro de aleatoriedade  no %s.'));
 		  }
@@ -41,11 +41,6 @@ class CriarMateria extends CI_Controller {
       	  
         $this->form_validation->set_rules("nome", "Nome", "required", array(
                 'required'      => 'Você não escreveu o %s.'));
-                
-                
-        $this->form_validation->set_rules("curso", "Curso", "required", array(
-                'required'      => 'Você não escreveu o %s.'));
-        
         
         $this->form_validation->set_rules("ano", "Ano", "required", array(
                 'required'      => 'Você não escreveu o %s.'));
@@ -53,7 +48,7 @@ class CriarMateria extends CI_Controller {
         
         if( $this->form_validation->run()) {
   	  	   	 $this->MateriaModel->setMateria($cadastro);
-      	    $this->load->view('Entrou/criacaoEfetuada');
+      	     $this->load->view('Entrou/criacaoEfetuada');
         }
         else
              $this->load->view('Entrou/erroCriacaoMateria');

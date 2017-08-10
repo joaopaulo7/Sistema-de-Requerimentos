@@ -58,8 +58,6 @@ class Cadastrar extends CI_Controller {
     public function fazerCadastro(){
     	  $cadastro = $this->input->post();
 		  
-		  //$cadastro['funcao'] =$this->input->post("infuncao");
-		  
 		  $cadastro['idUsuario'] = rand(0, 10000000);
 		  $this->form_validation->set_data($cadastro);
 		  $this->form_validation->set_rules("idUsuario", "Id Usuario", "is_unique[Usuario.idUsuario]", array('is_unique' => 'Erro de aleatoriedade  no %s.'));

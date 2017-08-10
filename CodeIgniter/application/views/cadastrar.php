@@ -21,7 +21,7 @@ and open the template in the editor.
 	
 			<div class="row">
 					<div id="box" class="col-md-6 col-md-offset-3">
-            <form method="POST" action="cadastrar/fazercadastro">
+       		<?php echo '<form method="POST" action="'.base_url('cadastrar/fazercadastro').'">'?>
             
             
             	 <?php echo form_error('nome'); ?>
@@ -60,10 +60,10 @@ and open the template in the editor.
                 Função:
                  </label>
 				<select name = "funcao">
-					 <option style = "color: black;" value="diretor">Diretor</option>
-					 <option style = "color: black;" value="coordenador">Coordenador</option>
- 					 <option style = "color: black;" value="professor">Professor</option>
-					 <option style = "color: black;" value="aluno">Aluno</option>
+					 <option style = "color: black;" value="Diretor">Diretor</option>
+					 <option style = "color: black;" value="Coordenador">Coordenador</option>
+ 					 <option style = "color: black;" value="Professor">Professor</option>
+					 <option style = "color: black;" value="Aluno">Aluno</option>
 				</select><br>
                 
                 

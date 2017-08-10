@@ -12,7 +12,7 @@ class Manutencao extends CI_Controller {
         $this->load->library("form_validation");
     }
     
-    private $erro = "", $loginu;
+    public $erro = "";
     	
     public function index() {
 		    $this->load->view("Entrou/entrarManutencao", array( "erro" =>$this->erro));
@@ -67,7 +67,7 @@ class Manutencao extends CI_Controller {
      	       
      	  if($this->form_validation->run()){
 				  $conf['senha'] = sha1($conf['senha']);
-				  redirect(base_url("Entrou/manutencao/entrou/".$this->session->userdata('login')."/".$conf['senha']));
+				  redirect(base_url("Entrou/manutencao/entrou/".$conf['cadastro_identificador']."/".$conf['senha']));
 		  }
 		  else
 				  $this->index();
@@ -75,8 +75,8 @@ class Manutencao extends CI_Controller {
     
     public function entrou($login, $senha){
 		if($this->ManutencaoModel->confirma($login, $senha)){
-			$this->loginu = $login;
-			$info['email']= $this->ManutencaoModel->getEmail($this->loginu)[0]->email;
+			$info['login'] = $login;
+			$info['email']= $this->ManutencaoModel->getEmail($login);
 			$this->load->view('Entrou/manutencao', $info);
 		}
 		else{
@@ -107,19 +107,18 @@ class Manutencao extends CI_Controller {
      	  {
         		if($dados['outraSenha']!="")
         		{
-											
-					$this->ManutencaoModel->setSenha(sha1($dados['outraSenha']),$this->loginu);
-				}	 
+					$this->ManutencaoModel->setSenha(sha1($dados['outraSenha']),$dados['login']);
+				}
         		else 
-        			$this->load->view('Entrou/manutencao');
-        		if($dados['email']!=$this->ManutencaoModel->getEmail($this->loginu))
+					$this->load->view('Entrou/manutencao', $dados);
+        		if($dados['email']!=$this->ManutencaoModel->getEmail($dados['login']))
         		{
       		    	$this->mandarEmailConf( $this->session->userdata('idUsuario'), $dados['email']);
-  	  		   	 	$this->ManutencaoModel->setEmail($dados['email'],$this->loginu);			 
+  	  		   	 	$this->ManutencaoModel->setEmail($dados['email'],$dados['login']);			 
         		}
         		$this->load->view('manutencaoEfetuada');	
 		  }
 		  else
-             $this->load->view('Entrou/manutencao',array('email' => $this->ManutencaoModel->getEmail()));
+			$this->load->view('Entrou/manutencao', $dados);
 	 }
 }

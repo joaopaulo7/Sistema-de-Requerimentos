@@ -21,16 +21,7 @@ and open the template in the editor.
                 </label>
                 <input type="text" id="nome" name="nome"><br>
                 
-                
-                <?php echo form_error('curso'); ?>
-                Departamento:
-				<select name = "curso">
-					 <option value="Geral">Geral</option>
-					 <option value="Informática">Informática</option>
- 					 <option value="Edificações">Edificações</option>
-					 <option value="Mecatrônica">Mecatrônica</option>
-				</select><br>
-                
+                <input type="hidden" id="curso" name="curso" value= <?php echo '"'.$this->MateriaModel->getArea().'"' ?> ><br>
                 
                 <?php echo form_error('ano'); ?>
                 <label for="ano">
