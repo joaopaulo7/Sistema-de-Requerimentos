@@ -20,8 +20,11 @@ class Loginmodel extends CI_Model {
     public function getDados($email){
 		$this->db->where('email', $email);
 		$resultado = $this->db->get('Pessoa')->result();
-		
-		$this->db->where('login', $resultado[0]->cadastro_identificador);
-		return $this->db->get('Usuario')->result();
+		if($resultado != null){
+			$this->db->where('login', $resultado[0]->cadastro_identificador);
+			return $this->db->get('Usuario')->result();
+		}
+		else
+			return null;
 	}
 }

@@ -12,10 +12,12 @@ class Manutencao extends CI_Controller {
         $this->load->library("form_validation");
     }
     
-    public $erro = "";
+    public $erro = " ";
     	
     public function index() {
-		    $this->load->view("Entrou/entrarManutencao", array( "erro" =>$this->erro));
+			$dados['dado'] = $this->ManutencaoModel->getAll();
+			$dados['erro'] = $this->erro;
+		    $this->load->view("Entrou/entrarManutencao", $dados);
     }
     
     public function mandarEmailConf($usuario, $email){

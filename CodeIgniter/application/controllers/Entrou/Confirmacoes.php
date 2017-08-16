@@ -18,7 +18,7 @@ class Confirmacoes extends CI_Controller {
     	$funcao = $this->ConfirmacoesModel->getfuncao();
     	if($funcao!= 'Professor')
     		$list['listavis'] = $this->ConfirmacoesModel->getListVis($funcao);
-    		$list['listasubs'] = $this->ConfirmacoesModel->getListSubs();
+    	$list['listasubs'] = $this->ConfirmacoesModel->getListSubs();
 		$this->load->view('Entrou/confirmacoes', $list);
     }
     

@@ -20,27 +20,33 @@ and open the template in the editor.
     </nav>
 			<div class="row">
 					<div id="conteudo" class="col-md-6 col-md-offset-3">
-					<h1>Confirme sua entrada antes de alterar</h1>
-					<?php echo $erro; ?>
-       			<?php echo '<form method="POST" action="'.base_url('Entrou/manutencao/entrar').'">'?>
-       			 
-       			    <?php echo form_error('cadastro_identificador'); ?>
-          	       <label for="cadastro_identificador">
-        	          	  Cadastro Identificador:
-           	     	 </label>
-         	       <input type="text" id="cadastro_identificador" name="cadastro_identificador"><br>
-         	       
-         	       
-         	       <?php echo form_error('senha'); ?>
-         	       <label for="senha">
-          	          Senha:
-         	       </label>
-         	       <input type="password" name="senha" id="senha"><br>
-         	       
-         	       <button type="submit">
-         	           Enviar
-         	       </button>
-         	   </form>
+								<p>Número: <?php echo $dado->cadastro_identificador;?> </p> <br>
+								<p>Nome:   <?php echo $dado->nome;?> </p> <br>
+								<p>Área:	  <?php echo $dado->area;?> </p> <br>
+								<p>Função: <?php echo $dado->funcao;?> </p> <br>
+								<p>E-mail: <?php echo $dado->email;?> </p> <br>
+								<hr>
+							<h1>Alterar dados</h1>
+							<?php// echo $erro; ?>
+						<?php echo '<form method="POST" action="'.base_url('Entrou/manutencao/entrar').'">'?>
+						 
+							<?php echo form_error('cadastro_identificador'); ?>
+						   <label for="cadastro_identificador">
+								  Cadastro Identificador:
+							 </label>
+						   <input type="text" id="cadastro_identificador" name="cadastro_identificador"><br>
+						   
+						   
+						   <?php echo form_error('senha'); ?>
+						   <label for="senha">
+							  Senha:
+						   </label>
+						   <input type="password" name="senha" id="senha"><br>
+						   
+						   <button type="submit">
+							   Enviar
+						   </button>
+					   </form>
         		 </div>
         	</div>
        	<div class="copyright">

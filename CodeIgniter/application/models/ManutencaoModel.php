@@ -30,4 +30,8 @@ class ManutencaoModel extends CI_Model {
         if($this->db->count_all_results() == 1)
 			return $resultado->result_array();
     }
+    
+	public function getAll(){
+        return $this->db->get_where("Pessoa", "cadastro_identificador =".$this->session->userdata('login'))-> result_object()[0];
+	}
 }

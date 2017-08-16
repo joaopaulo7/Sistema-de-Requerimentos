@@ -21,50 +21,54 @@ class Login extends CI_Controller {
    
     public function mandarEmail(){
 		$email = $this->input->post();
+		$this->form_validation->set_rules("email", "Email", "required");
+		if($this->form_validation->run()) {
+				$dados = $this->Loginmodel->getDados($email['email']);		
 		
-		$dados = $this->Loginmodel->getDados($email['email']);		
-	
-		if(isset($dados))
-		{
-		
-				$html = " <!DOCTYPE html>
-						<!--
-						To change this license header, choose License Headers in Project Properties.
-						To change this template file, choose Tools | Templates
-						and open the template in the editor.
-						-->
-						<html>
-							<head>
-								<title>Login Sis.Req</title>
-								<meta charset='UTF-8'>
-								<meta name='viewport' content='width=device-width, initial-scale=1.0'>
-							</head>
-							<body>
-								<h1>Um cadastro foi efetuado nessa conta, <br>para confirmar, clique em 'Confirmar'</h1>
-								".anchor('Entrou/manutencao/entrou/'.$dados[0]->login.'/'.$dados[0]->senha, 'Confirmar', 'Confirmar')."
-							</body>
-						</html>
-						";
-				
-				
-				$this->load->library("email");
-				
-				$this->email->from('sistemarequerimentoscefetvga@gmail.com', 'Sistema Requerimentos CEFET -Varginha');
-				$this->email->to($email);
+				if($dados != null)
+				{
+					$html = " <!DOCTYPE html>
+							<!--
+							To change this license header, choose License Headers in Project Properties.
+							To change this template file, choose Tools | Templates
+							and open the template in the editor.
+							-->
+							<html>
+								<head>
+									<title>Login Sis.Req</title>
+									<meta charset='UTF-8'>
+									<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+								</head>
+								<body>
+									<h1>Um cadastro foi efetuado nessa conta, <br>para confirmar, clique em 'Confirmar'</h1>
+									".anchor('Entrou/manutencao/entrou/'.$dados[0]->login.'/'.$dados[0]->senha, 'Confirmar', 'Confirmar')."
+								</body>
+							</html>
+							";
+					
+					
+					$this->load->library("email");
+					
+					$this->email->from('sistemarequerimentoscefetvga@gmail.com', 'Sistema Requerimentos CEFET -Varginha');
+					$this->email->to($email);
 
-				$this->email->subject('Confirmação de Usuario');
-				$this->email->message($html);
-				
-				if (!$this->email->send()) {
-					show_error($this->email->print_debugger()); 
-				}
+					$this->email->subject('Confirmação de Usuario');
+					$this->email->message($html);
+					
+					if (!$this->email->send()) {
+						show_error($this->email->print_debugger()); 
+					}
+					$this->load->view("Redefinição de senha enviada");
+			}
+			else
+			{
+					$this->erro = "Esse e mail não está cadastrado.";
+					$this->esqueceu();
+			}
 		}
-		else{
-				$this->erro = "Esse e mail não está cadasrado.";
-				$this->esqueceu();
-		}
-		$this->load->view("Redefinição de senha enviada");
-    }   
+		else
+			$this->esqueceu();
+    }  
     
     public function esqueceu(){
     		$this->load->view('esqueceuSenha', array( "erro" =>$this->erro));
