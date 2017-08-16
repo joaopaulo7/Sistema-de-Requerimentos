@@ -31,7 +31,30 @@ class CadastrarModel extends CI_Model {
 	public function setDiretor($usuario) {
 		$this->db->insert("Diretor",array( 'iddiretor'=> $usuario));
 	}
-   public function setCoordenador($usuario, $area) {
-   	$this->db->insert("Coordenador",array( 'idcoordenador'=> $usuario, 'area'=> $area));
-   }
+    public function setCoordenador($usuario, $area) {
+		$this->db->insert("Coordenador",array( 'idcoordenador'=> $usuario, 'area'=> $area));
+	}
+	public function funcValid($func, $area){
+		if($func == "Diretor"){
+			if($this->db->get('Diretor')->result_object() == null)
+				return true;
+			else
+				return false;
+		}
+		if($func == "Coordenador"){
+				$coords = $this->db->get('Coordenador')->result_object();
+				if($coords == null){
+					return true;
+				}
+				else
+				{
+					foreach( $coords as $coord)
+					{
+						if($coord->area == $area)
+							return false;
+					}
+				}
+		}
+		return true;
+	}
 }

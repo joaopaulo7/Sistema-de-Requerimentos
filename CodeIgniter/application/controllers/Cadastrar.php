@@ -15,8 +15,10 @@ class Cadastrar extends CI_Controller {
         }
     }
     
+    private $erro = " ";
+    
     public function index() {
-		$this->load->view('cadastrar');
+		$this->load->view('cadastrar', array( 'erro' => $this->erro));
     }
 
 
@@ -86,7 +88,7 @@ class Cadastrar extends CI_Controller {
                 'required'      => 'Você não escreveu o %s.'));
         
         
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[Pessoa.email]', array(
+        $this->form_validation->set_rules("email", "Email", "required|valid_email|is_unique[Pessoa.email]", array(
                 'required'      => 'Você não escreveu o %s.',
                 'valid_email'   => 'Esse %s não é válido.',
                 'is_unique'     => 'Esse %s já existe.'));
@@ -103,15 +105,21 @@ class Cadastrar extends CI_Controller {
         
 
         if( $this->form_validation->run()) {
-      	    $cadastro["senha"] = sha1($cadastro["senha"]);
-      	    $this->mandarEmailConf( $cadastro['idUsuario'], $cadastro['email']);
-  	  	   	 $this->CadastrarModel->setCadastro($cadastro);
-  	  	   	 if($cadastro['funcao'] == 'Diretor')
-  	  	   	 	$this->CadastrarModel->setDiretor($cadastro["cadastro_identificador"]);
-  	  	   	 if($cadastro['funcao'] == 'Coordenador')
-  	  	   	 	$this->CadastrarModel->setCoordenador($cadastro["cadastro_identificador"], $cadastro['area']);
-      	    $this->load->view('cadastroEfetuado');
-      	  }
+			if($this->CadastrarModel->funcValid($cadastro['funcao'], $cadastro['area'])){
+				$cadastro["senha"] = sha1($cadastro["senha"]);
+				$this->mandarEmailConf( $cadastro['idUsuario'], $cadastro['email']);
+				$this->CadastrarModel->setCadastro($cadastro);
+				if($cadastro['funcao'] == 'Diretor')
+					$this->CadastrarModel->setDiretor($cadastro["cadastro_identificador"]);
+				if($cadastro['funcao'] == 'Coordenador')
+					$this->CadastrarModel->setCoordenador($cadastro["cadastro_identificador"], $cadastro['area']);
+				$this->load->view('cadastroEfetuado');
+			}
+			else{
+				$this->erro = "A função escolhida já está ocupada";
+				$this->index();
+			}
+      	}
       	else
              $this->index();        
 	 }
