@@ -27,8 +27,8 @@ class ControladorModel extends CI_Model{
     	$coor = $this->db->get('Coordenador')->result_object()[0];
     	
     	$this->db->where('idFormularioSubs', $idform);
-    	$this->db->update('FormularioSubs', array('coordenador_req'=>$coor->idcoordenador));
-    	return $this->getProfessor($coor->idcoordenador);
+    	$this->db->update('FormularioSubs', array('coordenador_req'=>$coor->idCoordenador));
+    	return $this->getProfessor($coor->idCoordenador);
     }
     
     public function setCoorReqVis($id, $idform){
@@ -56,8 +56,7 @@ class ControladorModel extends CI_Model{
     
     public function setProfessor($idform, $id){
     	$this->db->where('idFormularioSubs', $idform);
-    	$this->db->update('FormularioSubs', array('professor_substituto'=>$id));
-    	return $this->db->update('FormularioSubs', array('professor_req'=>null));
+    	$this->db->update('FormularioSubs', array('professor_substituto'=>$id,'professor_req'=>null));
     }
     
     public function setCoorSubs($idform, $id){

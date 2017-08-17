@@ -17,19 +17,21 @@ and open the template in the editor.
 		<div class="container">
 		  <h2>Confirmações pendentes</h2>
 		<div class="panel-group" id="accordion">
+			<h4>Visitas técnicas</h4>
 			<?php if(isset($listavis)){
+				$i = 0;
 				foreach($listavis as $form)
 				{
 					echo '
 					<div class="panel panel-default">
 					  <div class="panel-heading">
 						<h4 class="panel-title">
-						  <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Collapsible Group 1</a>
+						  <a data-toggle="collapse" data-parent="#accordion" href="#collapses'.$i.'">Formulário de '.$form->proponente_da_viagem.'</a>
 						</h4>
 					  </div>
-					  <div id="collapse1" class="panel-collapse collapse">
-						<div class="panel-body">'.
-									"<p>Proponente da viagem: ".$form->proponente_da_viagem."<p>
+						<div id="collapses'.$i.'" class="panel-collapse collapse">
+							<div class="panel-body">'.
+									"<p>Proponente da viagem: ".$form->proponente_da_viagem."
 									<br> Local: ".$form->local."
 									<br> Tipo: ".$form->tipo_visita."
 									<br> data: ".$form->data."
@@ -44,35 +46,41 @@ and open the template in the editor.
 									<br> Descrição: ".$form->descricao."
 									<br> Avaliação: ".$form->avaliacao."
 									<br> Data Preenchimento: ".$form->data_preenchimento."
-									<br><a href='confirmacoes/confVis/".$form->idFormulario."'> Confirmar </a></div>";
+									<br> Confirmação do Coordenador: ".$form->coordenador."
+									<br> Confirmação do Diretor: ".$form->diretor."
+									<br><a href='confirmacoes/confVis/".$form->idFormulario."'> Confirmara</a><p>";
 						echo "</div>";
 					echo "</div>";
+				echo "</div>";
+				$i++;
        	 		}
        	 }
        	 ?>
         <h4>Substituições</h4>
 			<?php if(isset($listasubs)){
+				$i = 0;
 				foreach($listasubs as $form)
 				{
 					echo '
 					<div class="panel panel-default">
 					  <div class="panel-heading">
 						<h4 class="panel-title">
-						  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Collapsible Group 1</a>
+						  <a data-toggle="collapse" data-parent="#accordion" href="#collapsev'.$i.'">Formulário de '.$form->professor.'</a>
 						</h4>
 					  </div>
-					  <div id="collapse2" class="panel-collapse collapse">
+					  <div id="collapsev'.$i.'" class="panel-collapse collapse">
 						<div class="panel-body">'.
-									"<p>Materia: ".$form->materia."<p>
+									"<p>Professor: ".$form->professor."<p>
 									<br> Motivo: ".$form->motivo."
 									<br> Tipo: ".$form->data_da_substituicao."
 									<br> Horario: ".$form->horario_substituicao."
 									<br> Materia: ".$form->materia."
-									<br> Professor Substituto: ".$form->professor_substituto."
-									<br> Coordenador: ".$form->coordenador."
-									<br><a href='confirmacoes/confVis/".$form->idFormularioSubs."'> Confirmar </a></div>";
+									<br> Confrimação do Professor Substituto: ".$form->professor_substituto."
+									<br> Confrimação do Coordenador: ".$form->coordenador."
+									<br><a href='confirmacoes/confSubs/".$form->idFormularioSubs."'> Confirmar </a></div>";
 						echo "</div>";
 					echo "</div>";
+					$i++;
        	 		}
        	 }
        	 ?>

@@ -10,7 +10,7 @@ class SubstituicaoModel extends CI_Model {
         $resultado = $this->db->insert("FormularioSubs",$dados);
     }
     public function getProfessores(){
-    	  return $this->db->get("Pessoa")->result();
+    	  return $this->db->get_where("Pessoa"," cadastro_identificador !=".$this->session->userdata('login'))->result();
     }
     
     public function getMateria(){

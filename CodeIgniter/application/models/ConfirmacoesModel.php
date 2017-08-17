@@ -23,17 +23,10 @@ class ConfirmacoesModel extends CI_Model {
 			$form->diretor = $this->getPessoa($form->diretor);
 			$form->local = $this->getLocal($form->local);
 			$form->data_preenchimento = $this->ajustaData($form->data_preenchimento);
+			$form->data = $this->ajustaData($form->data);
         }
         return $forms;
     }
-    
-    public function getFormVis($id) {
-        return $this->db->get_where("FormularioVisita", "idFormulario =".$id)-> result()[0];
-    }
-    
-	 public function getFormSubs($id) {
-        return $this->db->get_where("FormularioSubs", "idFormularioSubs =".$id)-> result()[0];
-    }    
     
     public function getListSubs(){
         $this->db->order_by("data_da_substituicao", "asc");
@@ -44,7 +37,9 @@ class ConfirmacoesModel extends CI_Model {
         {
 			$form->professor_substituto = $this->getPessoa($form->professor_substituto);
 			$form->coordenador = $this->getPessoa($form->coordenador);
-			$form->materia = $this->getProf($form->materia);
+			$form->professor = $this->getProf($form->materia);
+			$form->materia = $this->getMateria($form->materia);
+			$form->data_da_substituicao = $this->ajustaData($form->data_da_substituicao);
         }
         return $forms;
     }
@@ -57,27 +52,32 @@ class ConfirmacoesModel extends CI_Model {
     
     public function getProf($mat) {
     	  $materia = $this->db->get_where("Materia",' idMateria ='.$mat)-> result();
-        return $this->getPessoa($materia[0]->professor);
+		  return $this->getPessoa($materia[0]->professor);
     }   
     
     public function isProf($idform){
         if($this->db->get_where("FormularioSubs", "idFormularioSubs = ".$idform)->result()[0]->professor_req == $this->session->userdata('login'))
         	 return true;
     }
+    
+    public function getMateria($id){
+        return $this->db->get_where("Materia", "idMateria = ".$id)->result()[0]->nome;
+    }
+    
     public function getLocal($id){
         return $this->db->get_where("Local", "idLocal = ".$id)->result()[0]->nome;
     }
     
     public function ajustaData( $data){
-		$ndata = "000/00/00";
+		$ndata = "0000/00/00";
 		$i = 0;
 		while($i < 10)
 		{
 			if($i < 4)
 				$ndata[$i+6] = $data[$i];
-			else if($i == 5 || $i == 7)
+			if($i == 2 || $i == 5)
 				$ndata[$i] = '/';
-			else if($i >5 && $i<7)
+			if($i >5 && $i<7)
 				$ndata[$i-2] = $data[$i];
 			else if($i > 7)
 				$ndata[$i-8] = $data[$i];
