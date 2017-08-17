@@ -13,7 +13,17 @@ class ConfirmacoesModel extends CI_Model {
     }
     
     public function getListVis($funcao) {
-        return $this->db->get_where("FormularioVisita", $funcao."_req =".$this->session->userdata('login'))-> result();
+		$this->db->order_by("data_preenchimento", "asc");
+		$this->db->where( $funcao."_req =".$this->session->userdata('login'));
+        $forms = $this->db->get("FormularioVisita")-> result();
+        foreach($forms as $form)
+        {
+			$form->proponente_da_viagem = $this->getPessoa($form->proponente_da_viagem);
+			$form->coordenador = $this->getPessoa($form->coordenador);
+			$form->diretor = $this->getPessoa($form->diretor);
+			$form->local = $this->getLocal($form->local);
+        }
+        return $forms;
     }
     
     public function getFormVis($id) {
@@ -25,7 +35,17 @@ class ConfirmacoesModel extends CI_Model {
     }    
     
     public function getListSubs(){
-        return $this->db->get_where("FormularioSubs", "Professor_req =".$this->session->userdata('login')." or coordenador_req = ". $this->session->userdata('login'))-> result();
+        $this->db->order_by("data_da_substituicao", "asc");
+        $this->db->where("Professor_req =".$this->session->userdata('login'));
+		$this->db->where("coordenador_req =".$this->session->userdata('login'));
+        $forms = $this->db->get("FormularioSubs")-> result();
+        foreach($forms as $form)
+        {
+			$form->professor_substituto = $this->getPessoa($form->professor_substituto);
+			$form->coordenador = $this->getPessoa($form->coordenador);
+			$form->materia = $this->getProf($form->materia);
+        }
+        return $forms;
     }
     
     public function getPessoa($id) {
@@ -37,14 +57,13 @@ class ConfirmacoesModel extends CI_Model {
     public function getProf($mat) {
     	  $materia = $this->db->get_where("Materia",' idMateria ='.$mat)-> result();
         return $this->getPessoa($materia[0]->professor);
-    }
-    
-	 public function getMateria($mat) {
-    	  return $materia = $this->db->get_where("Materia",' idMateria ='.$mat)-> result()[0]->nome;
-    }    
+    }   
     
     public function isProf($idform){
         if($this->db->get_where("FormularioSubs", "idFormularioSubs = ".$idform)->result()[0]->professor_req == $this->session->userdata('login'))
         	 return true;
+    }
+    public function getLocal($id){
+        return $this->db->get_where("Local", "idLocal = ".$id)->result()[0]->nome;
     }
 }
