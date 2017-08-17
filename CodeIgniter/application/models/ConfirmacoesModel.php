@@ -22,6 +22,7 @@ class ConfirmacoesModel extends CI_Model {
 			$form->coordenador = $this->getPessoa($form->coordenador);
 			$form->diretor = $this->getPessoa($form->diretor);
 			$form->local = $this->getLocal($form->local);
+			$form->data_preenchimento = $this->ajustaData($form->data_preenchimento);
         }
         return $forms;
     }
@@ -37,7 +38,7 @@ class ConfirmacoesModel extends CI_Model {
     public function getListSubs(){
         $this->db->order_by("data_da_substituicao", "asc");
         $this->db->where("Professor_req =".$this->session->userdata('login'));
-		$this->db->where("coordenador_req =".$this->session->userdata('login'));
+		$this->db->or_where("coordenador_req =".$this->session->userdata('login'));
         $forms = $this->db->get("FormularioSubs")-> result();
         foreach($forms as $form)
         {
@@ -66,4 +67,22 @@ class ConfirmacoesModel extends CI_Model {
     public function getLocal($id){
         return $this->db->get_where("Local", "idLocal = ".$id)->result()[0]->nome;
     }
+    
+    public function ajustaData( $data){
+		$ndata = "000/00/00";
+		$i = 0;
+		while($i < 10)
+		{
+			if($i < 4)
+				$ndata[$i+6] = $data[$i];
+			else if($i == 5 || $i == 7)
+				$ndata[$i] = '/';
+			else if($i >5 && $i<7)
+				$ndata[$i-2] = $data[$i];
+			else if($i > 7)
+				$ndata[$i-8] = $data[$i];
+			$i++;
+		}
+		return $ndata;
+	}
 }
