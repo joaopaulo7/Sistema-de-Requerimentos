@@ -15,8 +15,6 @@ and open the template in the editor.
             <form method="POST" action="criarLocal/fazerLocal">
                 
                 
-                <!-- O professor deve ser feio por meio de 
-                dropdowns tendo os nomes pré determinados-->
                 <?php echo form_error('nome'); ?>
                 <label for="nome">
                     Nome:
