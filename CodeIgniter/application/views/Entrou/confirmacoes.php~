@@ -11,51 +11,77 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-    	<div>
-			<h1>Todos os Formulários:</h1>    	
-    	</div>
-        <div>
-        <?php
-        if(isset($listavis)){
-        	echo "
-        <div>
-         <table>
-  				<tr>
-    				<th>Criador</th>
-  					<th>PDF</th>
-  					<th>Confirmar</th>
-  				</tr>";
-       	 		foreach($listavis as $form){
-     	   			echo '<tr>
-    								<td>'.$form->proponente_da_viagem.'</td>
-									<td><a href="confirmacoes/confVis/'.$form->idFormulario.'"> phpf </a></td>
-									<td><a href="#" > Confirmar</a> </td>
-  								</tr>';
+		<div class="container">
+		  <h2>Confirmações pendentes</h2>
+		<div class="panel-group" id="accordion">
+			<h4>Visitas técnicas</h4>
+			<?php if(isset($listavis)){
+				$i = 0;
+				foreach($listavis as $form)
+				{
+					echo '
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+						<h4 class="panel-title">
+						  <a data-toggle="collapse" data-parent="#accordion" href="#collapses'.$i.'">Formulário de '.$form->proponente_da_viagem.'</a>
+						</h4>
+					  </div>
+						<div id="collapses'.$i.'" class="panel-collapse collapse">
+							<div class="panel-body">'.
+									"<p>Proponente da viagem: ".$form->proponente_da_viagem."
+									<br> Local: ".$form->local."
+									<br> Tipo: ".$form->tipo_visita."
+									<br> data: ".$form->data."
+									<br> Transporte: ".$form->transporte."
+									<br> Horário de Saída: ".$form->horario_saida."
+									<br> Horario de Chegada: ".$form->horario_chegada."
+									<br> Local de chagada: ".$form->local_chegada."
+									<br> Local de Saída: ".$form->local_saida."
+									<br> Justificativa: ".$form->justificativa."
+									<br> Objetivo Geral: ".$form->objetivo_geral."
+									<br> Objetivo Específico: ".$form->objetivo_especifico."
+									<br> Descrição: ".$form->descricao."
+									<br> Avaliação: ".$form->avaliacao."
+									<br> Data Preenchimento: ".$form->data_preenchimento."
+									<br> Confirmação do Coordenador: ".$form->coordenador."
+									<br> Confirmação do Diretor: ".$form->diretor."
+									<br><a href='confirmacoes/confVis/".$form->idFormulario."'> Confirmara</a><p>";
+						echo "</div>";
+					echo "</div>";
+				echo "</div>";
+				$i++;
        	 		}
        	 }
        	 ?>
-        </table>
-        </div>
-        <?php
-        if(isset($listasubs)){
-        	echo "
-        <div>
-         <table>
-  				<tr>
-    				<th>Criador</th>
-  					<th>PDF</th>
-  					<th>Confirmar</th>
-  				</tr>";
-       	 		foreach($listasubs as $form){
-     	   			echo '<tr>
-    								<td>'.$this->ConfirmacoesModel->getProf($form->materia).'</td>
-									<td><a href="confirmacoes/confSubs/'.$form->idFormularioSubs.'" > phpf </a></td>
-									<td><a href="confirmacoes/pdfSubs/'.$form->idFormularioSubs.'"</a></td>
-  								</tr>';
+        <h4>Substituições</h4>
+			<?php if(isset($listasubs)){
+				$i = 0;
+				foreach($listasubs as $form)
+				{
+					echo '
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+						<h4 class="panel-title">
+						  <a data-toggle="collapse" data-parent="#accordion" href="#collapsev'.$i.'">Formulário de '.$form->professor.'</a>
+						</h4>
+					  </div>
+					  <div id="collapsev'.$i.'" class="panel-collapse collapse">
+						<div class="panel-body">'.
+									"<p>Professor: ".$form->professor."<p>
+									<br> Motivo: ".$form->motivo."
+									<br> Tipo: ".$form->data_da_substituicao."
+									<br> Horario: ".$form->horario_substituicao."
+									<br> Materia: ".$form->materia."
+									<br> Confrimação do Professor Substituto: ".$form->professor_substituto."
+									<br> Confrimação do Coordenador: ".$form->coordenador."
+									<br><a href='confirmacoes/confSubs/".$form->idFormularioSubs."'> Confirmar </a></div>";
+						echo "</div>";
+					echo "</div>";
+					$i++;
        	 		}
        	 }
        	 ?>
-        </table>
         </div>
+      </div>
    </body>
 </html>

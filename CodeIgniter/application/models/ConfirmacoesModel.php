@@ -47,7 +47,7 @@ class ConfirmacoesModel extends CI_Model {
     public function getPessoa($id) {
     	  if($id == null)
 	 	  	  return "não confirmado";
-        return $this->db->get_where("Pessoa",' cadastro_identificador ='.$id)-> result()[0]->nome;
+        return $this->db->get_where("Pessoa",' cadastro_identificador ='.$id)-> result()[0]->nome."(".$id.")";
     }
     
     public function getProf($mat) {

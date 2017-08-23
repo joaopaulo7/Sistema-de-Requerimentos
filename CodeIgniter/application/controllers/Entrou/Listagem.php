@@ -14,8 +14,10 @@ class Listagem extends CI_Controller {
         }
     }
     
-    public function index() {
-    	$list['listavis'] = $this->ListagemModel->getListVis();
+    public function index(){
+    	$funcao = $this->ListagemModel->getfuncao();
+    	if($funcao!= 'Professor')
+    		$list['listavis'] = $this->ListagemModel->getListVis($funcao);
     	$list['listasubs'] = $this->ListagemModel->getListSubs();
 		$this->load->view('Entrou/listagem', $list);
     }
