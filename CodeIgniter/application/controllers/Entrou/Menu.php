@@ -8,13 +8,15 @@ class Menu extends CI_Controller {
         $this->load->database();
         $this->load->helper(array("url","html"));
         $this->load->library("session");
+        $this->load->model("MenuModel");
         if(!$this->session->userdata("idUsuario")) {
             redirect("login");
         }
     }
     
     public function index() {
-		$this->load->view('Entrou/menu');
+    		$dados['liberaAlt']= $this->MenuModel->getAlt();
+			$this->load->view('Entrou/menu', $dados);
     }
     
     public function logout(){

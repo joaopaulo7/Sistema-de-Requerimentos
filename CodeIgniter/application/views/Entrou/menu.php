@@ -29,7 +29,7 @@ and open the template in the editor.
         echo anchor('Entrou/criarLocal', 'Criar Local').br().br();
         echo anchor('Entrou/manutencao', 'Manutencao').br().br();
         echo anchor('Entrou/confirmacoes', 'Confirmações').br().br();
-        echo anchor('Entrou/alterarFuncoes', 'Fazer Alterações').br().br();
+        if($liberaAlt){ echo anchor('Entrou/alterarFuncoes', 'Fazer Alterações').br().br(); }
         echo anchor('Entrou/menu/logout', 'Logout', 'title="Logout"');
         ?>
       </div>

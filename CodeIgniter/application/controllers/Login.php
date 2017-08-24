@@ -58,7 +58,7 @@ class Login extends CI_Controller {
 					if (!$this->email->send()) {
 						show_error($this->email->print_debugger()); 
 					}
-					$this->load->view("Redefinição de senha enviada");
+						$this->load->view("redefinicaoEnviada.php");
 			}
 			else
 			{
