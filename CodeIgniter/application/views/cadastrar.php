@@ -19,8 +19,8 @@ and open the template in the editor.
 	 	<h1>Sistema de coordenação de visitas técnicas e substituições de professores</h1>
    </nav>
 	
-			<div class="row">
-					<div id="box" class="col-md-6 col-md-offset-3">
+			<div class="row" >
+					<div id="caixa" class="col-md-6 col-md-offset-3" >
 						
 							<?php echo $erro; ?>	
 								
@@ -96,21 +96,17 @@ and open the template in the editor.
 								
 								<button style = "margin-left:50px;" type="submit">
 									Cadastrar
-								</button>
+								</button><br>
+								<div class="voltar">
+        							<a style = "color: #2E8B57;">
+                    				>> Voltar à tela de Login <<
+        						</div> 
 								
 							</form>
 						</div>
         
-        			<div class="voltar">
-        			<a style = "color: #2E8B57;">
-                    >> Voltar à tela de Login <<
-                </a>
-        			</div>    
-        <div class="copyright">
-			<div class="col-md-12">
-				<p>Grupo Dedicação, Cefet-MG - CAMPUS VIII / Unidade Varginha &copy; Todos os direitos reservados.</p>
-		  	</div>
-		  </div>
+       
+        
       </body>
 </html>
     </body>

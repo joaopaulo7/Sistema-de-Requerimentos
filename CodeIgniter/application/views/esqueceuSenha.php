@@ -18,7 +18,7 @@ and open the template in the editor.
 	 <nav class="navbar navbar-default" role="navigation">
     	<h1>Sistema de coordenação de visitas técnicas e substituições de professores</h1>
     </nav>
-			<div class="row">
+			<div class="row" style="padding:50px;">
 					<div id="conteudo" class="col-md-6 col-md-offset-3">
         			<h2>Login</h2>
        			<?php echo '<form method="POST" action="'.base_url('login/mandarEmail').'">'?>
@@ -33,10 +33,6 @@ and open the template in the editor.
          	   </form>
         		 </div>
         	</div>
-       	<div class="copyright">
-				<div class="col-md-12">
-					<p>Grupo Dedicação, Cefet-MG - CAMPUS VIII / Unidade Varginha &copy; Todos os direitos reservados.</p>
-				</div>
-			</div>
+       	
       </body>
 </html>

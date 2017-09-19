@@ -26,11 +26,5 @@ and open the template in the editor.
                 <?php echo anchor('login', '>> Voltar à tela de Login <<') ?>
 			</div>
 		</div>
-		
-		<div class="copyright">
-			<div class="col-md-12">
-				<p>Grupo Dedicação, Cefet-MG - CAMPUS VIII / Unidade Varginha &copy; Todos os direitos reservados.</p>
-		  	</div>
-		  </div>
     </body>
 </html>

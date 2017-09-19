@@ -21,7 +21,7 @@ and open the template in the editor.
 			<div class="row">
 					<div id="conteudo" class="col-md-6 col-md-offset-3">
         			<h2>Login</h2>
-       			<?php echo '<form method="POST" action="'.base_url('login/mandaEmail').'">'?>
+       			<?php echo '<form method="POST" action="'.base_url('login/mandarEmail').'">'?>
         				 <?php echo $erro; ?><br>
           	       <label style = "color: white;"for="login">
         	          	  Email:
@@ -33,10 +33,6 @@ and open the template in the editor.
          	   </form>
         		 </div>
         	</div>
-       	<div class="copyright">
-				<div class="col-md-12">
-					<p>Grupo Dedicação, Cefet-MG - CAMPUS VIII / Unidade Varginha &copy; Todos os direitos reservados.</p>
-				</div>
-			</div>
+       	
       </body>
 </html>

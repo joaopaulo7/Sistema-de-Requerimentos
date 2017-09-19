@@ -14,75 +14,75 @@ class CriarFormularioVisita extends CI_Controller {
             redirect("login");
         }
     }
-    
+
     public function index() {
-    	$data['local'] = $this->VisitaModel->getLocal();
-		$this->load->view('Entrou/requerirVisita', $data);
+        $data['local'] = $this->VisitaModel->getLocal();
+        $this->load->view('Entrou/requerirVisita', $data);
     }
-    
+
     public function fazerFormulario(){
-    	$cadastro = $this->input->post();
-		  
-		$cadastro['proponente_da_viagem'] = $this->session->userdata("login");
-		  
-		 $cadastro['idFormulario'] = rand(0, 10000000);
-		 $this->form_validation->set_data($cadastro);
-	    $this->form_validation->set_rules("idFormulario", "Id Formulario", "is_unique[FormularioVisita.idFormulario]", array('is_unique' => 'Erro de aleatoriedade  no %s.'));
-	    while(!$this->form_validation->run()) {
-	  	    	$cadastro['idFormulario'] = rand(0, 1000000);
-	    $this->form_validation->set_data($cadastro);
-	 	 $this->form_validation->set_rules("idFormulario", "Id Formulario", "is_unique[FormularioVisita.idFormulario]", array('is_unique' => 'Erro de aleatoriedade  no %s.'));
-		 }
-		  
-		  
+        $cadastro = $this->input->post();
+
+        $cadastro['proponente_da_viagem'] = $this->session->userdata("login");
+
+         $cadastro['idFormulario'] = rand(0, 10000000);
+         $this->form_validation->set_data($cadastro);
+        $this->form_validation->set_rules("idFormulario", "Id Formulario", "is_unique[FormularioVisita.idFormulario]", array('is_unique' => 'Erro de aleatoriedade  no %s.'));
+        while(!$this->form_validation->run()) {
+                $cadastro['idFormulario'] = rand(0, 1000000);
         $this->form_validation->set_data($cadastro);
-        
-        
+         $this->form_validation->set_rules("idFormulario", "Id Formulario", "is_unique[FormularioVisita.idFormulario]", array('is_unique' => 'Erro de aleatoriedade  no %s.'));
+         }
+
+
+        $this->form_validation->set_data($cadastro);
+
+
         $this->form_validation->set_rules("tipo_visita", "Tipo de Visita", "required", array(
                 'required' => 'Você não escreveu o %s.'));
-              	  
-      	  
+
+
         $this->form_validation->set_rules("data", "Data", "required", array(
                 'required'      => 'Você não escreveu a %s.'));
-                
-                
+
+
         $this->form_validation->set_rules("transporte", "Transporte", "required", array(
                 'required'      => 'Você não escreveu o %s.'));
-        
-        
+
+
         $this->form_validation->set_rules("horario_saida", "Horário De Saída", "required", array(
                 'required'      => 'Você não escreveu o %s.'));
-        
-        
-     	  $this->form_validation->set_rules("horario_chegada", "Horário De Chegada", "required", array(
-     	        'required'      => 'Você não escreveu o %s.'));
-     	        
-     	  $this->form_validation->set_rules("justificativa", "Justificativa", "required", array(
+
+
+          $this->form_validation->set_rules("horario_chegada", "Horário De Chegada", "required", array(
+                'required'      => 'Você não escreveu o %s.'));
+
+          $this->form_validation->set_rules("justificativa", "Justificativa", "required", array(
                 'required' => 'Você não escreveu a %s.'));
-              	  
-      	  
+
+
         $this->form_validation->set_rules("objetivo_geral", "Objetivo Geral", "required", array(
                 'required'      => 'Você não escreveu o %s.'));
-        
-        
+
+
         $this->form_validation->set_rules("objetivo_especifico", "Objetivo Específico", "required", array(
                 'required'      => 'Você não escreveu o %s.'));
-        
-        
-     	  $this->form_validation->set_rules("descricao", "Descrição", "required", array(
-     	        'required'      => 'Você não escreveu a %s.'));
-        
-        
+
+
+          $this->form_validation->set_rules("descricao", "Descrição", "required", array(
+                'required'      => 'Você não escreveu a %s.'));
+
+
         $this->form_validation->set_rules("avaliacao", "Avaliação", "required", array(
-     	        'required'      => 'Você não escreveu a %s.'));
-        
-        
+                'required'      => 'Você não escreveu a %s.'));
+
+
         if( $this->form_validation->run()) {
-        		 $cadastro['data_preenchimento'] = date("Y-m-d");
-  	  	   	 $this->VisitaModel->setFormulario($cadastro);
-      	    redirect('Entrou/controladorRequisitos/criadoVis/'.$cadastro['idFormulario']);
-      	  }
-      	else
-        $this->load->view('Entrou/erroFomularioVisita');
-	 }
+                 $cadastro['data_preenchimento'] = date("Y-m-d");
+             $this->VisitaModel->setFormulario($cadastro);
+            redirect('Entrou/controladorRequisitos/criadoVis/'.$cadastro['idFormulario']);
+          }
+        else
+        $this->index();
+     }
 }

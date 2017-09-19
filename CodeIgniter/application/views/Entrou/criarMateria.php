@@ -12,24 +12,24 @@ and open the template in the editor.
     </head>
     <body>
         <div>
-            <form method="POST" action="criarMateria/fazerMateria">
-                
-                
+            <?php echo '<form method="POST" action="'.base_url('Entrou/criarMateria/fazerMateria').'">'; ?>
+
+
                 <?php echo form_error('nome'); ?>
                 <label for="nome">
                     Nome:
                 </label>
                 <input type="text" id="nome" name="nome"><br>
-                
+
                 <input type="hidden" id="curso" name="curso" value= <?php echo '"'.$this->MateriaModel->getArea().'"' ?> ><br>
-                
+
                 <?php echo form_error('ano'); ?>
                 <label for="ano">
                     Ano:
                 </label>
                 <input type="text" id="ano" name="ano"><br>
-                
-                
+
+
                 <button type="submit">
                     Enviar
                 </button>

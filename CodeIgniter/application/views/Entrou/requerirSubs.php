@@ -12,50 +12,50 @@ and open the template in the editor.
     </head>
     <body>
         <div>
-            <form method="POST" action="criarFormularioSubstituicao/fazerFormulario">
-            
-				<?php echo form_error('materia'); ?>
+            <?php echo '<form method="POST" action="'.base_url('Entrou/criarFormularioSubstituicao/fazerFormulario').'">';?>
+
+                <?php echo form_error('materia'); ?>
                 Materia:
-					 <select name ="materia" >
-							<?php
-								foreach($mat as $materia){
-									echo "<option value='". (String)$materia->idMateria."'>".$materia->nome."</option>";
-								}									 
-							?>
-					 </select><br>
-                
+                     <select name ="materia" >
+                            <?php
+                                foreach($mat as $materia){
+                                    echo "<option value='". (String)$materia->idMateria."'>".$materia->nome."</option>";
+                                }
+                            ?>
+                     </select><br>
+
                 <?php echo form_error('professor_substituto'); ?>
                 Substituto:
-					 <select name ="professor_substituto">
-							<?php
-								foreach($prof as $professor){
-									echo "<option value='".(String)$professor->cadastro_identificador."'>".$professor->nome."</option>";
-								}									 
-							?>
-					 </select><br>
-                
-                
+                     <select name ="professor_substituto">
+                            <?php
+                                foreach($prof as $professor){
+                                    echo "<option value='".(String)$professor->cadastro_identificador."'>".$professor->nome."</option>";
+                                }
+                            ?>
+                     </select><br>
+
+
                 <?php echo form_error('motivo'); ?>
                 <label for="motivo">
                     Motivo:
                 </label>
                 <input type="text" id="motivo" name="motivo"><br>
-                
-                
+
+
                 <?php echo form_error('data_da_substituicao'); ?>
                 <label for="data_da_substituicao">
                     Data da substituicao:
                 </label>
                 <input type="text" id="data_da_substituicao" name="data_da_substituicao"><br>
-                
-                
+
+
                 <?php echo form_error('horario_substituicao'); ?>
                 <label for="horario_substituicao">
                     Horario:
                 </label>
                 <input type="text" id="horario_substituicao" name="horario_substituicao"><br>
-                
-                
+
+
                 <button type="submit">
                     Enviar
                 </button>
